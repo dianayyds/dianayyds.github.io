@@ -4,7 +4,7 @@
 
 # Site
 title: 尹晨旭的个人博客
-subtitle: '海的那边,是论文'
+subtitle: '海的那边,是敌人'
 description: '我这一生,如履薄冰'
 keywords: "Go,Python,算法,Linux,深度学习"
 author: ycx
@@ -43,7 +43,8 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
-syntax_highlighter: highlight.js
+syntax_highlighter: prismjs
+
 highlight:
   enable: false
   line_number: true
@@ -54,8 +55,14 @@ highlight:
 prismjs:
   enable: true
   preprocess: true
-  line_number: true
+  line_number: false
   tab_replace: ''
+
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'tomorrow'
+  line_number: true    # default false
+  custom_css: 
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -116,18 +123,3 @@ deploy:
   repo: git@github.com:dianayyds/dianayyds.github.io.git
   branch: main
 
-
-valine:
-  enable: true
-  appId:  mtFp4MpZnbMjg5sxScmghnS5-MdYXbMMI
-  appKey:  kw57V3yKY4Wp00XBTEIPlslw
-  notify: false
-  verify: false
-  serverURLs: # When the custom domain name is enabled, fill it in here
-  placeholder: 期待你的交流 # comment box placeholder
-  avatar: mm # gravatar style
-  meta: [nick, mail, link] # Custom comment header
-  pageSize: 10 # pagination size
-  visitor: false # leancloud-counter-security is not supported for now. When visitor is set to be true, appid and appkey are recommended to be the same as leancloud_visitors' for counter compatibility. Article reading statistic https://valine.js.org/visitor.html
-  comment_count: true # If false, comment count will only be displayed in post page, not in home page
-  recordIP: false # Whether to record the commenter IP
