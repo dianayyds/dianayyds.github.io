@@ -3,7 +3,6 @@ title: docker
 date: 2024-4-24 11:44:10
 author: 尹晨旭
 top: true
-cover: true
 summary: 一些自我总结的docker相关概念
 categories: docker
 tags:
