@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 尹晨旭的个人博客
-subtitle: '海的那边,是敌人'
+title: 九日的个人博客
+subtitle: '不负韶华行且知'
 description: '我这一生,如履薄冰'
 keywords: "Go,Python,算法,Linux,深度学习"
 author: ycx
@@ -42,9 +42,6 @@ filename_case: 0
 render_drafts: false
 
 post_asset_folder: true
-marked:
-  prependRoot: true
-  postAsset: true
 
 relative_link: false
 future: true
