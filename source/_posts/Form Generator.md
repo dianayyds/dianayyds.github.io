@@ -1,5 +1,5 @@
 ---
-title: 实现前端动态表单功能
+title: 动态表单自动生成
 author: 尹晨旭
 date: 2024-04-24 15:57:30
 summary: form-generator的使用

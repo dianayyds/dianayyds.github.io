@@ -1,6 +1,6 @@
 ---
-title: hexo+typora插入图片
-typora-root-url: hexo与typora结合便捷的插入图片
+title: hexo与typora结合
+typora-root-url: hexo_typora
 tags:
   - hexo
   - typora

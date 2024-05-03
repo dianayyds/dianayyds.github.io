@@ -1,5 +1,5 @@
 ---
-title: 介绍一下自己
+title: 自我介绍
 typora-root-url: introduction
 top: true
 tags:
