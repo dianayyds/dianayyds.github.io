@@ -1,9 +1,6 @@
 ---
 title: hexo与typora结合
 typora-root-url: hexo_typora
-tags:
-  - hexo
-  - typora
 date: 2024-04-26 13:04:00
 summary: 解决hexo插入图片无法显示的问题
 categories: hexo

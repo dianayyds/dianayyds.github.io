@@ -1,8 +1,6 @@
 ---
 title: Kafka面经
 typora-root-url: kafka_question
-tags:
-  - 面试
 date: 2024-05-03 16:23:42
 summary: 什么是kafka？
 categories: Kafka

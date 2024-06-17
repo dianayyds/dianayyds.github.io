@@ -2,8 +2,6 @@
 title: 自我介绍
 typora-root-url: introduction
 top: true
-tags:
-  - 自我认知
 date: 2024-04-26 13:45:05
 summary: 我叫尹晨旭
 categories: 自我认知

@@ -1,10 +1,8 @@
 ---
 title: Kafka知识点
 typora-root-url: kafka_knowledge
-tags:
-  - Kafka
 date: 2024-05-03 16:32:26
-summary: Kafka中Topic、Partition、Groups、Brokers概念辨析
+summary: Topic、Partition、Groups、Brokers概念辨析
 categories: Kafka
 ---
 
@@ -30,4 +28,3 @@ Kafka[消息队列](https://cloud.baidu.com/product/RabbitMQ.html)有两种消�
 1. Topic是逻辑概念，用于对数据流进行分类和组织；Partition是物理概念，用于实现数据的高可用性和容错性；
 2. Groups是消费者组织形式，多个消费者组成一个Group共享一个Topic的消息；Brokers是Kafka集群中的实体，负责存储和管理Topic的Partition副本；
 3. Kafka通过Topic、Partition、Groups和Brokers的组合，实现了高效的分布式流处理平台。在实际应用中，需要根据业务需求合理配置这些参数，以获得最佳的性能和可靠性。
-   
