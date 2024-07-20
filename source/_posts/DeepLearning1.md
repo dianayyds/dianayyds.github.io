@@ -1,8 +1,6 @@
 ---
 title: 深度学习实验
 typora-root-url: DeepLearning1
-tags:
-  - 1
 date: 2024-07-20 16:49:09
 summary: pytorch操作入门、线性回归、softmax回归
 categories: 深度学习
