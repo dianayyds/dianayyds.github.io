@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Kafka知识点, Go,Python,算法,Linux,深度学习">
-    <meta name="description" content="Topic、Partition、Groups、Brokers概念辨析">
+    <meta name="keywords" content="图论, Go,Python,算法,Linux,深度学习">
+    <meta name="description" content="图是计算机中常用的一种存储结构，图论是数学的一个分支，研究图上的优化算法。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Kafka知识点 | 九日的个人博客</title>
+    <title>图论 | 九日的个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -332,12 +332,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Kafka知识点</h1>
+                    <h1 class="description center-align post-title">图论</h1>
                 </div>
             </div>
         </div>
@@ -369,8 +369,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Kafka/" class="post-category">
-                                Kafka
+                            <a href="/categories/algorithm/" class="post-category">
+                                algorithm
                             </a>
                         
                     </div>
@@ -382,7 +382,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-05-03
+                    2024-07-27
                 </div>
                 
 
@@ -406,15 +406,350 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Kafka中Topic、Partition、Groups、Brokers概念辨析"><a href="#Kafka中Topic、Partition、Groups、Brokers概念辨析" class="headerlink" title="Kafka中Topic、Partition、Groups、Brokers概念辨析"></a>Kafka中Topic、Partition、Groups、Brokers概念辨析</h1><h3 id="一、Topic和Partition"><a href="#一、Topic和Partition" class="headerlink" title="一、Topic和Partition"></a>一、Topic和Partition</h3><p>在Kafka中，Topic是一个逻辑概念，用于对数据流进行分类和组织。每个Topic可以包含多个Partition，Partition是物理概念，用于实现数据的高可用性和容错性。每个Partition对应一个或多个副本，副本分为领导者(leader)和追随者(follower)，领导者负责处理读写请求，追随者用于备份数据。如果领导者宕机，某个追随者会被选举为新的领导者。</p>
-<h3 id="二、Groups和Brokers"><a href="#二、Groups和Brokers" class="headerlink" title="二、Groups和Brokers"></a>二、Groups和Brokers</h3><p>Kafka<a target="_blank" rel="noopener" href="https://cloud.baidu.com/product/RabbitMQ.html">消息队列</a>有两种消费模式，分别是点对点模式和订阅&#x2F;发布模式。在订阅&#x2F;发布模式下，多个消费者可以组成一个Group来共享一个Topic的消息。消费者在Group中共享负载，共同消费Topic的消息。Brokers是Kafka集群中的实体，每个Broker负责<a target="_blank" rel="noopener" href="https://cloud.baidu.com/product/bos.html">存储</a>和管理Topic的Partition副本。Kafka集群将Topic的多个Partition分布在多个Broker上，以提高系统的可靠性和容错性。</p>
-<h3 id="三、实例解析"><a href="#三、实例解析" class="headerlink" title="三、实例解析"></a>三、实例解析</h3><p>为了更好地理解这些概念，我们可以举一个公路运输的例子。假设不同的起始点和目的地需要修不同高速公路（Topic），高速公路上可以提供多条车道（Partition），流量大的公路多修几条车道保证畅通，流量小的公路少修几条车道避免浪费。收费站好比消费者，车多的时候多开几个一起收费避免堵在路上，车少的时候开几个让汽车并道就好了。如果没有车道（Partition），一条公路（Topic）对应的车辆集在分布式集群服务组中，就会分布不均匀，即可能导致某段公路上的车辆很多，若此公路的车流量很大的情况下，该段公路就可能导致压力很大，吞吐也容易导致瓶颈。</p>
-<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><p>通过以上分析，我们可以得出以下结论：</p>
-<ol>
-<li>Topic是逻辑概念，用于对数据流进行分类和组织；Partition是物理概念，用于实现数据的高可用性和容错性；</li>
-<li>Groups是消费者组织形式，多个消费者组成一个Group共享一个Topic的消息；Brokers是Kafka集群中的实体，负责存储和管理Topic的Partition副本；</li>
-<li>Kafka通过Topic、Partition、Groups和Brokers的组合，实现了高效的分布式流处理平台。在实际应用中，需要根据业务需求合理配置这些参数，以获得最佳的性能和可靠性。</li>
-</ol>
+                <h4 id="建图-链式前向星"><a href="#建图-链式前向星" class="headerlink" title="建图(链式前向星)"></a>建图(链式前向星)</h4><pre class="language-c++" data-language="c++"><code class="language-c++">int h[N],e[N], en[N];&#x2F;&#x2F;这里的en一般写成ne
+int idx;
+int w[N];
+void add(int a, int b, int c)
+&#123;
+	e[idx] &#x3D; b;
+	en[idx] &#x3D; h[a];
+	w[idx] &#x3D; c;
+	h[a] &#x3D; idx++;
+&#125;</code></pre>
+
+<h4 id="寻找距离r点最远的距离"><a href="#寻找距离r点最远的距离" class="headerlink" title="寻找距离r点最远的距离"></a>寻找距离r点最远的距离</h4><pre class="language-c++" data-language="c++"><code class="language-c++">void dfs(int r,int l)
+&#123;
+		for (int i &#x3D; h[r]; i !&#x3D; -1; i &#x3D; en[i])&#x2F;&#x2F;遍历r的所有临边
+		&#123;
+			int q &#x3D; e[i];
+			if (!st[q])
+			&#123;
+				st[q] &#x3D; true;
+				int co &#x3D; w[i];
+				if (l + co &gt; maxx)
+				&#123;
+					far &#x3D; q;
+					maxx &#x3D; l + co;
+				&#125;
+				dfs(q, l + co);
+			&#125;
+		&#125;
+&#125;
+</code></pre>
+
+
+
+<h4 id="二分图判断"><a href="#二分图判断" class="headerlink" title="二分图判断"></a>二分图判断</h4><p>当且仅当图中没有奇数环，在所有连通块中，将随机一个点染色，然后dfs遍历连通块，和这个点相连的点染其他颜色，如果颜色相同，那么失败</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">bool check&#x3D;true;
+for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;
+	if (!color[i]) &#123;
+	      dfs(i, 1);
+	&#125;
+&#125;
+
+void dfs(int a, int b) &#123;
+	color[a] &#x3D; b;
+	for (int i &#x3D; h[a]; ~i; i &#x3D; ne[i]) &#123;
+		if (!color[e[i]]) &#123;
+			dfs(e[i], 3 - b);&#x2F;&#x2F;1和2是不同的颜色
+		&#125; else if (color[e[i]] &#x3D;&#x3D; b) &#123;
+			check &#x3D; false;
+			return;
+		&#125;
+	&#125;
+&#125;</code></pre>
+
+<h4 id="树遍历"><a href="#树遍历" class="headerlink" title="树遍历"></a>树遍历</h4><p>前序遍历：根左右<br>中序遍历：左根右<br>后序遍历：左右根<br>根据前中遍历求得后续遍历（存在ans），当无法找到根节点时表示无法完成,根据build的顺序可以决定存储结果是前中后序列遍历</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">void build1(int ql, int qr, int zl, int zr) &#123;
+	int root &#x3D; qianxu[ql];
+	int k &#x3D; -1;
+	for (int i &#x3D; zl; i &lt;&#x3D; zr; i++) &#123;
+		if (zhongxu[i] &#x3D;&#x3D; root) &#123;
+			k &#x3D; i;
+			break;
+		&#125;
+	&#125;
+	if (k &#x3D;&#x3D; -1) &#123;
+		st &#x3D; false;
+		return;
+	&#125; else &#123;
+		int llen &#x3D; k - zl;
+		int rlen &#x3D; zr - k;
+		if (llen &gt; 0) &#123;
+			build1(ql + 1, ql + llen, zl, k - 1);&#x2F;&#x2F;遍历左子树
+		&#125;
+		if (rlen &gt; 0) &#123;
+			build1(qr - rlen + 1, qr, k + 1, zr);&#x2F;&#x2F;遍历右子树
+		&#125;
+	&#125;
+	ans.push_back(root);&#x2F;&#x2F;遍历根
+&#125;
+
+&#x2F;&#x2F;结论：对于任何给定的完全二叉树结点数量，都可以通过数组直接给定，结点数量就是数组长度
+</code></pre>
+
+<h4 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h4><p>遍历n次，每次取出距离连通块最近的没有标记过的点，然后标记该点，通过该点的临边更新其他边，返回最小生成树边总长度。</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">int prim() &#123;
+	int ans &#x3D; 0;
+        memset(st,0,sizeof(st));
+	memset(dist, 0x3f, sizeof(dist));
+	dist[1] &#x3D; 0;
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;
+		int t &#x3D; -1;
+		for (int j &#x3D; 1; j &lt;&#x3D; n; j++) &#123;
+			if (!st[j] &amp;&amp; (t &#x3D;&#x3D; -1 || dist[j] &lt; dist[t]))
+				t &#x3D; j;
+		&#125;
+		st[t] &#x3D; true;
+		ans +&#x3D; dist[t];
+		for (int j &#x3D; 1; j &lt;&#x3D; n; j++) &#123;
+			dist[j] &#x3D; min(dist[j], an[t][j]);
+		&#125;
+	&#125;
+	return ans;
+&#125;</code></pre>
+
+<h4 id="迪杰斯特拉（nlogn）："><a href="#迪杰斯特拉（nlogn）：" class="headerlink" title="迪杰斯特拉（nlogn）："></a>迪杰斯特拉（nlogn）：</h4><p>基本思想：初始化为{0,n},意思为n到n的距离为0，每次取出优先队列中最小的点，也就是可以确定的最短路径和点，根据这个已经确定的点去更新周围的点，但凡是能更新的，都加入优先队列中，st[i]表示第i点是否已经被确认最短路径了，而且最开始n刚加进去的时候还没有被确认，所以一开始别把n认定为确定的点了。</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">#define x first
+#define y second
+typedef pair&lt;int, int&gt; pi;
+void djs(int n)
+&#123;
+
+	memset(dist, 0x3f, sizeof(dist));
+        memset(st,false,sizeof(st));
+	priority_queue&lt;pi, vector&lt;pi&gt;, greater&lt;pi&gt;&gt; heap;
+	dist[n] &#x3D; 0;
+	heap.push(&#123; 0,n &#125;);
+	while (heap.size())
+	&#123;
+		auto p &#x3D; heap.top();
+		heap.pop();
+		if (st[p.y])
+			continue;
+		st[p.y] &#x3D; true;
+		for (int u &#x3D; h[p.y];u !&#x3D; -1; u &#x3D; ne[u])
+		&#123;
+			int a &#x3D; e[u];&#x2F;&#x2F;这个点
+			int dis &#x3D; w[u];
+			if (dist[a] &gt; dist[p.y] + dis)
+			&#123;
+				dist[a] &#x3D; dist[p.y] + dis;
+				heap.push(&#123;dist[a],a&#125;);
+			&#125;
+		&#125;
+	&#125;
+&#125;</code></pre>
+
+
+
+<h4 id="bellman-ford"><a href="#bellman-ford" class="headerlink" title="bellman-ford"></a>bellman-ford</h4><pre class="language-c++" data-language="c++"><code class="language-c++">int dist[510];
+struct Edge &#123;
+	int a, b, c;
+&#125;edge[10010];
+int main()
+&#123;
+	memset(dist, 0x3f, sizeof(dist));
+	dist[1] &#x3D; 0;
+	int n, m, k;
+	cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
+	for (int i &#x3D; 1; i &lt;&#x3D; m; i++)
+	&#123;
+		cin &gt;&gt; edge[i].a &gt;&gt; edge[i].b &gt;&gt; edge[i].c;
+	&#125;
+	for (int i &#x3D; 1; i &lt;&#x3D; k; i++)
+	&#123;
+		int distt[510];
+		memcpy(distt,dist,sizeof(dist));
+		for (int j &#x3D; 1; j &lt;&#x3D; m; j++)
+		&#123;
+			int to &#x3D; edge[j].b;
+			int pp &#x3D; edge[j].a;
+			dist[to] &#x3D; min(dist[to], distt[pp] + edge[j].c);
+		&#125;
+	&#125;
+	if (dist[n] &gt; 0x3f3f3f3f&#x2F;2)&#x2F;&#x2F;重要，比如说5是无穷大，4是无穷大，4-5是-2，那么5会更新为0x3f3f3f3f-2;
+		cout &lt;&lt; &quot;impossible&quot;;
+	else
+		cout &lt;&lt; dist[n];
+	return 0;
+&#125;
+</code></pre>
+
+
+
+<h4 id="spfa"><a href="#spfa" class="headerlink" title="spfa"></a>spfa</h4><p>bellman-ford的优化版本，对于含负权也可以用，最坏 O(nm)最好O(m),m是边数，n是边数<br>基本思想是：初始加入最初点，st[i]表示i是否在queue中，根据queue里面的点依次更新其他所有相邻点，如果一个点被更新了，那么加入队列，注意出队列时要把st改变。</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">void spfa() &#123;
+	memset(dist, 0x3f, sizeof(dist));
+      memset(st,false,sizeof(st));
+	q.push(1);
+	dist[1] &#x3D; 0;
+	st[1] &#x3D; true;
+	while (q.size()) &#123;
+		int a &#x3D; q.front();
+		q.pop();
+		st[a]&#x3D;false;
+		for (int i &#x3D; h[a]; i !&#x3D; -1; i &#x3D; ne[i]) &#123;
+			if (dist[e[i]] &gt; dist[a] + w[i]) &#123;
+				dist[e[i]] &#x3D; dist[a] + w[i];
+				if (!st[e[i]]) &#123;
+					q.push(e[i]);
+					st[e[i]]&#x3D;true;
+				&#125;
+			&#125;
+		&#125;
+	&#125;
+&#125;</code></pre>
+
+
+
+
+
+<h4 id="无向图的最小环（大于等于三个节点）："><a href="#无向图的最小环（大于等于三个节点）：" class="headerlink" title="无向图的最小环（大于等于三个节点）："></a>无向图的最小环（大于等于三个节点）：</h4><p>在floyd的第k层未开始循环前，已经求解了所有i和j之间经过1<del>k-1的最短路径，为了按照环中的最大点来分类，枚举点k的所有临点i和j（i和j均小于k），如果i和j已经可达，那么i和j之间的点也只是1</del>k-1，满足环中最大点为k，此时环的值为k的两个临边和加上i和j的最短路径长度。<br>为了按顺序输出方案，可以把方案定为k<del>i</del>get_path(i,j)~j,这里的get_path是i和j的最短路中所有点（不包括i和j），在floyd循环中可以记录最后一个更新i和j距离的点，记为pos[i][j],那么get_path（i,j）可以用分治法，即get_path（i,j）&#x3D;get_path(i,pos[i][j])+pos[i][j]+get_path(pos[i][j],j),当pos[i][j]&#x3D;&#x3D;0时意味着i和j的最短路不经过其他点，那么按照get_path（i,j）的定义”i和j的最短路中所有点（不包括i和j）“，就可以直接返回了。</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">#include&lt;bits&#x2F;stdc++.h&gt;
+using namespace std;
+const int INF &#x3D; 1e9;
+typedef long long ll;
+int w[110][110], f[110][110];
+vector&lt;int&gt; path;
+int pos[110][110];
+void get_path(int i, int j) &#123;
+	if (pos[i][j] &#x3D;&#x3D; 0)
+		return;
+	get_path(i, pos[i][j]);
+	path.push_back(pos[i][j]);
+	get_path(pos[i][j], j);
+&#125;
+int main(void) &#123;
+	int n, m;
+	cin &gt;&gt; n &gt;&gt; m;
+	memset(w, 0x3f, sizeof(w));
+	for (int i &#x3D; 1; i &lt;&#x3D; m; i++) &#123;
+		int a, b, c;
+		cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
+		w[a][b] &#x3D; min(w[a][b], c);
+		w[b][a] &#x3D; min(w[b][a], c);
+	&#125;
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+		w[i][i] &#x3D; 0;
+	memcpy(f, w, sizeof(w));
+	int ans &#x3D; INF;
+	for (int k &#x3D; 1; k &lt;&#x3D; n; k++) &#123;
+		for (int i &#x3D; 1; i &lt; k; i++) &#123;
+			for (int j &#x3D; i + 1; j &lt; k; j++) &#123;
+				if ((ll)w[i][k] + w[k][j] + f[i][j] &lt; ans) &#123;
+					&#123;
+						ans &#x3D; w[i][k] + w[k][j] + f[i][j];
+						path.clear();
+						path.push_back(k);
+						path.push_back(i);
+						get_path(i, j);
+						path.push_back(j);
+					&#125;
+
+				&#125;
+			&#125;
+		&#125;
+		for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;
+			for (int j &#x3D; 1; j &lt;&#x3D; n; j++) &#123;
+				&#123;
+					if (f[i][k] + f[k][j] &lt; f[i][j]) &#123;
+						f[i][j] &#x3D; f[i][k] + f[k][j];
+						pos[i][j] &#x3D; k;
+					&#125;
+				&#125;
+
+			&#125;
+		&#125;
+	&#125;
+	if(path.size())
+	&#123;
+	    for (auto i : path)
+		cout &lt;&lt; i &lt;&lt; &quot; &quot;;
+	&#125;
+	else
+	cout&lt;&lt;&quot;No solution.\n&quot;;
+	return 0;
+&#125;
+</code></pre>
+
+
+
+
+
+<h4 id="最短路计数"><a href="#最短路计数" class="headerlink" title="最短路计数"></a>最短路计数</h4><p>按照djs来求解过程一定是拓扑序。如果f+w&lt;f，那么最短路数量前赋予给后，如果f+w和f相同那么最短路数量后+前</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">void djs(int a) &#123;
+	memset(st, false, sizeof(st));
+	memset(f, 0x3f, sizeof(f));
+	priority_queue&lt;pi, vector&lt;pi&gt;, greater&lt;pi&gt;&gt; heap;
+	heap.push(&#123;0, a&#125;);
+	f[a] &#x3D; 0;
+	dp[a] &#x3D; 1;
+	while (heap.size()) &#123;
+		pi u &#x3D; heap.top();
+		heap.pop();
+		if (st[u.y])
+			continue;
+		st[u.y] &#x3D; true;
+		for (int i &#x3D; h[u.y]; ~i; i &#x3D; ne[i]) &#123;
+			if (u.x + w[i] &lt; f[e[i]]) &#123;
+				f[e[i]] &#x3D; u.x + w[i];
+				heap.push(&#123;f[e[i]], e[i]&#125;);
+				dp[e[i]] &#x3D; dp[u.y];&#x2F;&#x2F;第一次遇到最短路，覆盖掉最短路
+			&#125; else if (u.x + w[i] &#x3D;&#x3D; f[e[i]]) &#123;
+				dp[e[i]] &#x3D;(dp[e[i]]+ dp[u.y]);&#x2F;&#x2F;相当于dp
+			&#125;
+		&#125;
+	&#125;
+&#125;</code></pre>
+
+<h4 id="最短路计数拓展"><a href="#最短路计数拓展" class="headerlink" title="最短路计数拓展"></a>最短路计数拓展</h4><p>求每个点的最短路和次短路数量<br>思路为在djs过程中将每个点分为两部分，f[i][0]是i的最短路长度，f[i][1]是到i的次短路长度，cnt[i][0]是到i的最短路数量，cnt[i][1]是到i的次短路数量。<br>heap中弹出来的为点+状态的二维表示状态，所以判断是否出现也是点+状态的二维表示，f[u][type]+w[i]有四种情况，是被f[k][0],f[k][1]隔开的，分别是小于f[k][0]，类比与树形dp，次小值继承前一个最小值的信息；然后是等于f[k][0]和f[k][1],然后是大于f[k][0]小于f[k][1]，注意每一次更新都需要将更新后的二维状态加入heap数组。</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">struct node &#123;
+	int dist, u, type;
+	bool operator&gt;(const node a) const &#123;
+		return dist &gt; a.dist;
+	&#125;
+&#125;;
+
+void djs(int s) &#123;
+	memset(f, 0x3f, sizeof(f));
+	memset(st, 0, sizeof(st));
+	memset(cnt, 0, sizeof(cnt));
+	priority_queue&lt;node, vector&lt;node&gt;, greater&lt;node&gt;&gt; heap;
+	heap.push(&#123;0, s, 0&#125;);
+	f[s][0] &#x3D; 0;
+	cnt[s][0] &#x3D; 1;
+	cnt[s][1] &#x3D; 0;
+	while (heap.size()) &#123;
+		node l &#x3D; heap.top();
+		heap.pop();
+		int u &#x3D; l.u, dist &#x3D; l.dist, type &#x3D; l.type;
+		if (st[u][type])
+			continue;
+		st[u][type] &#x3D; true;
+		for (int i &#x3D; h[u]; ~i; i &#x3D; ne[i]) &#123;
+			int k &#x3D; e[i];
+			if (dist + w[i] &lt; f[k][0]) &#123;
+				f[k][1] &#x3D; f[k][0], cnt[k][1] &#x3D; cnt[k][0];
+				heap.push(&#123;f[k][1], k, 1&#125;);
+				f[k][0] &#x3D; dist + w[i], cnt[k][0] &#x3D; cnt[u][type];
+				heap.push(&#123;f[k][0], k, 0&#125;);
+			&#125; else if (dist + w[i] &#x3D;&#x3D; f[k][0])
+				cnt[k][0] +&#x3D; cnt[u][type];
+			else if (dist + w[i] &lt; f[k][1]) &#123;
+				f[k][1] &#x3D; dist + w[i], cnt[k][1] &#x3D; cnt[u][type];
+				heap.push(&#123;f[k][1], k, 1&#125;);
+			&#125; else if (dist + w[i] &#x3D;&#x3D; f[k][1])
+				cnt[k][1] +&#x3D; cnt[u][type];
+		&#125;
+	&#125;
+&#125;
+</code></pre>
+
+
+
+
+
 
                 
             </div>
@@ -441,7 +776,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://dianayyds.github.io/2024/05/03/kafka-knowledge/">https://dianayyds.github.io/2024/05/03/kafka-knowledge/</a>
+                    <a href="https://dianayyds.github.io/2024/07/27/tu-lun/">https://dianayyds.github.io/2024/07/27/tu-lun/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -793,31 +1128,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/06/04/rl/">
+                <a href="/2024/07/27/suan-fa-xiao-ji-qiao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="RL">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="算法小技巧">
                         
-                        <span class="card-title">RL</span>
+                        <span class="card-title">算法小技巧</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            强化学习
+                            对于算法初学者来说，一些实用的函数可以帮助节省不少时间
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-06-04
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-07-27
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    强化学习
+                            <a href="/categories/algorithm/" class="post-category">
+                                    algorithm
                                 </a>
                             
                             
@@ -834,31 +1169,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/05/03/kafka-question/">
+                <a href="/2024/07/27/shu-xue/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Kafka面经">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="数学">
                         
-                        <span class="card-title">Kafka面经</span>
+                        <span class="card-title">数学</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是kafka？
+                            算法中常见的数学知识，这里只总结本人在各种题库中遇见频率较高且实用的算法。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-05-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-27
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Kafka/" class="post-category">
-                                    Kafka
+                            <a href="/categories/algorithm/" class="post-category">
+                                    algorithm
                                 </a>
                             
                             

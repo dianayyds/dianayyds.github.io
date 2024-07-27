@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Kafka知识点, Go,Python,算法,Linux,深度学习">
-    <meta name="description" content="Topic、Partition、Groups、Brokers概念辨析">
+    <meta name="keywords" content="数据结构, Go,Python,算法,Linux,深度学习">
+    <meta name="description" content="分享算法中常见的一些高级数据结构，包括trie字典树，并查集，线段树等">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Kafka知识点 | 九日的个人博客</title>
+    <title>数据结构 | 九日的个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -332,12 +332,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Kafka知识点</h1>
+                    <h1 class="description center-align post-title">数据结构</h1>
                 </div>
             </div>
         </div>
@@ -369,8 +369,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Kafka/" class="post-category">
-                                Kafka
+                            <a href="/categories/algorithm/" class="post-category">
+                                algorithm
                             </a>
                         
                     </div>
@@ -382,7 +382,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-05-03
+                    2024-07-27
                 </div>
                 
 
@@ -406,15 +406,286 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Kafka中Topic、Partition、Groups、Brokers概念辨析"><a href="#Kafka中Topic、Partition、Groups、Brokers概念辨析" class="headerlink" title="Kafka中Topic、Partition、Groups、Brokers概念辨析"></a>Kafka中Topic、Partition、Groups、Brokers概念辨析</h1><h3 id="一、Topic和Partition"><a href="#一、Topic和Partition" class="headerlink" title="一、Topic和Partition"></a>一、Topic和Partition</h3><p>在Kafka中，Topic是一个逻辑概念，用于对数据流进行分类和组织。每个Topic可以包含多个Partition，Partition是物理概念，用于实现数据的高可用性和容错性。每个Partition对应一个或多个副本，副本分为领导者(leader)和追随者(follower)，领导者负责处理读写请求，追随者用于备份数据。如果领导者宕机，某个追随者会被选举为新的领导者。</p>
-<h3 id="二、Groups和Brokers"><a href="#二、Groups和Brokers" class="headerlink" title="二、Groups和Brokers"></a>二、Groups和Brokers</h3><p>Kafka<a target="_blank" rel="noopener" href="https://cloud.baidu.com/product/RabbitMQ.html">消息队列</a>有两种消费模式，分别是点对点模式和订阅&#x2F;发布模式。在订阅&#x2F;发布模式下，多个消费者可以组成一个Group来共享一个Topic的消息。消费者在Group中共享负载，共同消费Topic的消息。Brokers是Kafka集群中的实体，每个Broker负责<a target="_blank" rel="noopener" href="https://cloud.baidu.com/product/bos.html">存储</a>和管理Topic的Partition副本。Kafka集群将Topic的多个Partition分布在多个Broker上，以提高系统的可靠性和容错性。</p>
-<h3 id="三、实例解析"><a href="#三、实例解析" class="headerlink" title="三、实例解析"></a>三、实例解析</h3><p>为了更好地理解这些概念，我们可以举一个公路运输的例子。假设不同的起始点和目的地需要修不同高速公路（Topic），高速公路上可以提供多条车道（Partition），流量大的公路多修几条车道保证畅通，流量小的公路少修几条车道避免浪费。收费站好比消费者，车多的时候多开几个一起收费避免堵在路上，车少的时候开几个让汽车并道就好了。如果没有车道（Partition），一条公路（Topic）对应的车辆集在分布式集群服务组中，就会分布不均匀，即可能导致某段公路上的车辆很多，若此公路的车流量很大的情况下，该段公路就可能导致压力很大，吞吐也容易导致瓶颈。</p>
-<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><p>通过以上分析，我们可以得出以下结论：</p>
-<ol>
-<li>Topic是逻辑概念，用于对数据流进行分类和组织；Partition是物理概念，用于实现数据的高可用性和容错性；</li>
-<li>Groups是消费者组织形式，多个消费者组成一个Group共享一个Topic的消息；Brokers是Kafka集群中的实体，负责存储和管理Topic的Partition副本；</li>
-<li>Kafka通过Topic、Partition、Groups和Brokers的组合，实现了高效的分布式流处理平台。在实际应用中，需要根据业务需求合理配置这些参数，以获得最佳的性能和可靠性。</li>
-</ol>
+                <h4 id="trie字典树"><a href="#trie字典树" class="headerlink" title="trie字典树"></a>trie字典树</h4><pre class="language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;cnt是总共出现的点的个数，如果是字符串字典树，那么就是所有字符的数量
+int son[N][27], idx, cnt[N];
+&#x2F;&#x2F;插入这个字符串
+void insert(string a) &#123;
+	int p &#x3D; 0;
+	for (int i &#x3D; 0; a[i]; i++) &#123;
+		int u &#x3D; a[i] - &#39;a&#39;;
+		if (!son[p][u])
+			son[p][u] &#x3D; ++idx;
+		p &#x3D; son[p][u];
+	&#125;
+	cnt[p]++;
+&#125;
+&#x2F;&#x2F;返回这个字符串之前出现的次数
+int query(string a) &#123;
+	int p &#x3D; 0;
+	for (int i &#x3D; 0; a[i]; i++) &#123;
+		int u &#x3D; a[i] - &#39;a&#39;;
+		if (!son[p][u]) &#123;
+			return 0;
+		&#125;
+		p &#x3D; son[p][u];
+	&#125;
+	return cnt[p];
+&#125;
+</code></pre>
+
+<h4 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h4><pre class="language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;初始化：
+for (int i &#x3D; 1; i &lt;&#x3D; n; i++) p[i] &#x3D; i;
+
+&#x2F;&#x2F;查找：
+int find(int a) &#123;
+	if (p[a] !&#x3D; a)
+		p[a] &#x3D; find(p[a]);
+	return p[a];
+&#125;
+&#x2F;&#x2F;添加a与b：
+p(find(a))&#x3D;find(b);
+</code></pre>
+
+<h4 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h4><p>其基本用法是动态的在1~n这些数字中加减后，仍然可以快速求得前缀和。</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">int n, m;
+ll tr[N];
+ll lowbit(ll a) &#123;
+	return a &amp; (-a);
+&#125;
+&#x2F;&#x2F;表示an[a]+&#x3D;k;
+void add(ll a,ll k) &#123;
+	for (int i &#x3D; a; i &lt;&#x3D; n; i +&#x3D; lowbit(i)) &#123;
+		tr[i] +&#x3D; k;
+	&#125;
+&#125;
+&#x2F;&#x2F;注意i&gt;0,数字的下标也是从0开始的。ask(a)返回前a个数的和
+ll ask(ll a) &#123;
+	ll sum &#x3D; 0;
+	for (int i &#x3D; a; i; i -&#x3D; lowbit(i)) &#123;
+		sum +&#x3D; tr[i];
+	&#125;
+	return sum;
+&#125;</code></pre>
+
+<h4 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h4><pre class="language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;建树操作，初始调用为build(1,1,n);注意u是根节点编号
+void build(int u, int l, int r) &#123;
+	tr[u] &#x3D; &#123;l, r&#125;;
+	if (l &#x3D;&#x3D; r)
+		return;
+	int mid &#x3D; tr[u].l + tr[u].r &gt;&gt; 1;
+	build(u &lt;&lt; 1, l, mid);
+	build(u &lt;&lt; 1 | 1, mid + 1, r);
+        pushup(u);
+&#125;
+&#x2F;&#x2F;修改操作，调用为modify(1,a,v)，将a这个点的值改为v,注意pushup是在更新了子节点后，用子节点的信息来更新自身节点，非常重要,注意u是根节点编号。
+void modify(int u, int l,int r, int v) &#123;
+	if (tr[u].l &gt;&#x3D; l &amp;&amp; tr[u].r &lt;&#x3D; r)
+		tr[u].v &#x3D; v;
+	else &#123;
+                pushdown(u);
+		int mid &#x3D; tr[u].r + tr[u].l &gt;&gt; 1;
+		if (l &lt;&#x3D; mid)
+			modify(u &lt;&lt; 1, l,r, v);
+		if(r&gt;mid)
+			modify(u &lt;&lt; 1 | 1, l,r, v);
+		pushup(u);
+	&#125;
+&#125;
+&#x2F;&#x2F;查询操作:调用为query(1,l,r)，在l和r这个区间内寻找答案，注意u是根节点编号
+int query(int u, int l, int r) &#123;
+	if (l &lt;&#x3D; tr[u].l &amp;&amp; r &gt;&#x3D; tr[u].r)
+		return tr[u].v;
+        pushdown(u);
+	int ans &#x3D; 0;
+	int mid &#x3D; tr[u].l + tr[u].r &gt;&gt; 1;
+	if (l &lt;&#x3D; mid)
+		ans &#x3D; max(ans, query(u &lt;&lt; 1, l, r));
+	if (r &gt; mid)
+		ans &#x3D; max(ans, query(u &lt;&lt; 1 | 1, l, r));
+	return ans;
+&#125;
+&#x2F;&#x2F;或者：
+node query(int u, int l, int r) &#123;
+	if (tr[u].l &gt;&#x3D; l &amp;&amp; tr[u].r &lt;&#x3D; r) &#123;
+		return tr[u];
+	&#125; else &#123;
+		pushdown(u);
+		int mid &#x3D; tr[u].l + tr[u].r &gt;&gt; 1;
+		if (r &lt;&#x3D; mid)
+			return query(u &lt;&lt; 1, l, r);
+		if (l &gt; mid)
+			return query(u &lt;&lt; 1 | 1, l, r);
+
+		node res;
+		auto ll &#x3D; query(u &lt;&lt; 1, l, r);
+		auto rr &#x3D; query(u &lt;&lt; 1 | 1, l, r);
+		pushup(res, ll, rr);
+		return res;
+	&#125;
+&#125;
+
+&#x2F;&#x2F;pushup操作：用子节点的信息来更新自身节点，每道题有独特的写法
+void pushup(int u) &#123;
+	tr[u].v &#x3D; max(tr[u &lt;&lt; 1].v, tr[u &lt;&lt; 1 | 1].v);
+&#125;
+void pushdown(int u)&#123;
+        
+        tr[u].add&#x3D;0;
+
+&#125;</code></pre>
+
+<h4 id="线段树经典题"><a href="#线段树经典题" class="headerlink" title="线段树经典题"></a>线段树经典题</h4><p>区间修改和求区间gcd。<br>前提知识：gcd(a,b,c,d)&#x3D;gcd(a,b-a,c-b,d-c);&#x2F;&#x2F;注意到除了第一项，后面都可以转化成差分的形式，例如gcd(2,6,12)&#x3D;gcd(2,4,6)，但要注意gcd要取绝对值，因为差分可能存在负数，但绝对值一定是对的，<br>gcd(a,b,c,d)&#x3D;gcd(gcd(a,b),gcd(c,d))是这道题的核心思想<br>所以可以维护一个原数组的差分数组线段树，要求l<del>r的gcd,先在树中求l</del>1-r的gcd，然后求an[l],这里相当于求差分数组的1~l的和，用线段树去查找。</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">int n, m;
+typedef long long ll;
+ll an[500010];
+ll sn[500010];
+struct Node &#123;
+	ll l, r;
+	ll sum, d;
+&#125; tr[500010 * 4];
+ll gcd(ll a, ll b) &#123;
+	return b ? gcd(b, a % b) : a;
+&#125;
+void pushup(Node &amp;u, Node &amp;l, Node &amp;r) &#123;
+	u.sum &#x3D; l.sum + r.sum;
+	u.d &#x3D; gcd(l.d, r.d);
+&#125;
+void pushup(int u) &#123;
+	pushup(tr[u], tr[u &lt;&lt; 1], tr[u &lt;&lt; 1 | 1]);
+&#125;
+build(1, 1, n);
+while (m--) &#123;
+	char a;
+	cin &gt;&gt; a;
+	if (a &#x3D;&#x3D; &#39;Q&#39;) &#123;
+		int l, r;
+		cin &gt;&gt; l &gt;&gt; r;
+		ll c &#x3D; query(1, 1, l).sum;
+		if (l &#x3D;&#x3D; r)
+			cout &lt;&lt; c&lt;&lt;&quot;\n&quot;;
+		else &#123;
+			ll d &#x3D; query(1, l + 1, r).d;
+			cout &lt;&lt; abs(gcd(c, d)) &lt;&lt; &quot;\n&quot;;
+		&#125;
+	&#125; else &#123;
+		ll l, r, d;
+		cin &gt;&gt; l &gt;&gt; r &gt;&gt; d;
+		modify(1, l, d);
+		if (r + 1 &lt;&#x3D; n)
+			modify(1, r + 1, -d);
+	&#125;
+&#125;
+	return 0;
+&#125;
+</code></pre>
+
+<h4 id="主席树"><a href="#主席树" class="headerlink" title="主席树"></a>主席树</h4><p>用于在静态的数组中，动态寻找子区间第k小的数。<br>主席树本质上是可持久化权值线段树，前k个数组成的权值线段树可以用前k-1个数组成的线段树作为基础，动态开点。在遍历时，用       r-（l-1）的信息得到，l-r的权值线段树信息。</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">const int N &#x3D; 100010;
+int n, m;
+int a[N];
+vector&lt;int&gt; nums;
+
+struct Node
+&#123;
+    int l, r;
+    int cnt;
+&#125;tr[N * 4 + N * 17];  &#x2F;&#x2F;N * 4 + NlogN
+
+int root[N], idx;
+
+int find(int x)
+&#123;
+    return lower_bound(nums.begin(), nums.end(), x) - nums.begin();
+&#125;
+
+&#x2F;&#x2F; 对左右边界建立节点并编号, build是建立好骨架, 每个版本insert改不同数据
+int build (int l, int r)
+&#123;
+    int p &#x3D; ++idx;
+    if (l &#x3D;&#x3D; r) return p;
+    int mid &#x3D; l + r &gt;&gt; 1;
+    tr[p].l &#x3D; build(l, mid), tr[p].r &#x3D; build(mid+1, r);
+    return p;
+&#125;
+
+&#x2F;&#x2F; l, r是要放入的坐标范围, x是要插入的数离散化后的位置
+int insert(int p, int l, int r, int x)
+&#123;
+    &#x2F;&#x2F; 假设现在是从外界第一次执行insert, 那么调用的时候, p必定是根节点,
+    &#x2F;&#x2F; 那么q就相当于复制了一个根节点, 从节点q进入这棵树的时候, 也能得到之前的所有内容.
+    &#x2F;&#x2F; 同理, 再往下二分递归的时候, insert会继续复制根节点的左(右)子树, 一直递归直到l&#x3D;&#x3D;r之前,
+    &#x2F;&#x2F; q和原来的p都是一毛一样. 直到l&#x3D;&#x3D;r才真正插入了新点, 每次插入的时间空间复杂度都是lgk,
+    &#x2F;&#x2F; 总加起来就是lg1+lg2+...+lgn &#x3D; lg(n!), 根据stirling公式, 结果为nlgn   (大O)
+    int q &#x3D; ++idx;
+    tr[q] &#x3D; tr[p]; 
+    if (l &#x3D;&#x3D; r)  &#x2F;&#x2F; 如果区间长度为1, 说明就是放这里了
+    &#123;
+        &#x2F;&#x2F; tr[q].cnt++是表示插在这个叶节点上
+        &#x2F;&#x2F; 这个线段树只是保存的每个区间里面的元素个数
+        &#x2F;&#x2F; 每次插入都只是覆盖到的那堆区间里面的cnt发生+1
+        tr[q].cnt++;
+        return q;
+    &#125;
+
+    int mid &#x3D; l + r &gt;&gt; 1;
+    if (x &lt;&#x3D; mid) tr[q].l &#x3D; insert(tr[p].l, l, mid, x);
+    else tr[q].r &#x3D; insert(tr[p].r, mid+1, r, x);
+    tr[q].cnt &#x3D; tr[tr[q].l].cnt + tr[tr[q].r].cnt;  &#x2F;&#x2F; 相当于pushup了
+    return q;
+&#125;
+
+
+&#x2F;&#x2F; l ,r是检索范围, q是当前第r个节点root[r]能包含1~r之间所有
+&#x2F;&#x2F; p的输入是root[l-1], 作用是剔除这个根节点所包含数据的影响
+int query(int q, int p, int l, int r, int k)
+&#123;
+    if (l &#x3D;&#x3D; r) return r; &#x2F;&#x2F; 如果找到位置
+
+    &#x2F;&#x2F; 目标是求l r之间的第k小
+    &#x2F;&#x2F; tr[tr[q].l].cnt - tr[tr[p].l].cnt的结果是求出在p之后插入到q这些数之后,
+    &#x2F;&#x2F; 有多少个数(cnt)插入了p的左子树, 由于p的内容肯定不能出现在l r之间(p根节点就是root[l-1]), 
+    &#x2F;&#x2F; 所以cnt就是相当于&quot;存在q左子树里面但不存在于1, l 之间的数的个数&quot;
+    int cnt &#x3D; tr[tr[q].l].cnt - tr[tr[p].l].cnt; 
+
+    int mid &#x3D; l + r &gt;&gt; 1;
+    &#x2F;&#x2F; k &lt;&#x3D; cnt说明要找的元素在q的左子树里面, 同时这里面也要剔除掉包含在p左子树的内容
+    if (k &lt;&#x3D; cnt) return query(tr[q].l, tr[p].l, l, mid, k);
+    else return query(tr[q].r, tr[p].r, mid+1, r, k - cnt);  &#x2F;&#x2F; 类似同上
+&#125;
+
+int main()
+&#123;
+    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i ++ )
+    &#123;
+        scanf(&quot;%d&quot;, &amp;a[i]);
+        nums.push_back(a[i]);  &#x2F;&#x2F;离散化使用
+    &#125;
+
+    &#x2F;&#x2F; 离散化
+    sort(nums.begin(), nums.end());
+    nums.erase(unique(nums.begin(), nums.end()), nums.end());
+
+    &#x2F;&#x2F; 构造线段树, 构造n个版本的线段树
+    &#x2F;&#x2F; 第0个版本的什么都没有就用build, build是建立好骨架, 每个版本insert改不同数据
+    root[0] &#x3D; build(0, nums.size() - 1);
+    &#x2F;&#x2F; 后面的每插入一个点算一个版本, 每次插入都只是比上一个版本多1个数
+    &#x2F;&#x2F; 左右参数给0和nums.size()-1是因为离散化之后的值域就是在0, nums.size()-1之间
+    &#x2F;&#x2F; 要插入必须得把这些地方全包才能保证找得到插入点
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+        root[i] &#x3D; insert(root[i-1], 0, nums.size() - 1, find(a[i]));
+
+
+    while (m -- )
+    &#123;
+        int l, r, k;
+        scanf(&quot;%d%d%d&quot;, &amp;l, &amp;r, &amp;k);
+        printf(&quot;%d\n&quot;, nums[query(root[r], root[l-1], 0, nums.size()-1, k)]);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+
 
                 
             </div>
@@ -441,7 +712,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://dianayyds.github.io/2024/05/03/kafka-knowledge/">https://dianayyds.github.io/2024/05/03/kafka-knowledge/</a>
+                    <a href="https://dianayyds.github.io/2024/07/27/shu-ju-jie-gou/">https://dianayyds.github.io/2024/07/27/shu-ju-jie-gou/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -793,31 +1064,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/06/04/rl/">
+                <a href="/2024/07/27/shu-xue/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="RL">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="数学">
                         
-                        <span class="card-title">RL</span>
+                        <span class="card-title">数学</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            强化学习
+                            算法中常见的数学知识，这里只总结本人在各种题库中遇见频率较高且实用的算法。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-06-04
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-07-27
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    强化学习
+                            <a href="/categories/algorithm/" class="post-category">
+                                    algorithm
                                 </a>
                             
                             
@@ -834,31 +1105,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/05/03/kafka-question/">
+                <a href="/2024/07/20/deeplearning1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Kafka面经">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="深度学习实验">
                         
-                        <span class="card-title">Kafka面经</span>
+                        <span class="card-title">深度学习实验</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是kafka？
+                            介绍一些pytorch的一些操作，然后实现线性回归和softmax回归
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-05-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-20
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Kafka/" class="post-category">
-                                    Kafka
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
                                 </a>
                             
                             

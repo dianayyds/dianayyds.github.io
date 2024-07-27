@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Kafka知识点, Go,Python,算法,Linux,深度学习">
-    <meta name="description" content="Topic、Partition、Groups、Brokers概念辨析">
+    <meta name="keywords" content="算法小技巧, Go,Python,算法,Linux,深度学习">
+    <meta name="description" content="对于算法初学者来说，一些实用的函数可以帮助节省不少时间">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Kafka知识点 | 九日的个人博客</title>
+    <title>算法小技巧 | 九日的个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -332,12 +332,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Kafka知识点</h1>
+                    <h1 class="description center-align post-title">算法小技巧</h1>
                 </div>
             </div>
         </div>
@@ -369,8 +369,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Kafka/" class="post-category">
-                                Kafka
+                            <a href="/categories/algorithm/" class="post-category">
+                                algorithm
                             </a>
                         
                     </div>
@@ -382,7 +382,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-05-03
+                    2024-07-27
                 </div>
                 
 
@@ -406,15 +406,245 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Kafka中Topic、Partition、Groups、Brokers概念辨析"><a href="#Kafka中Topic、Partition、Groups、Brokers概念辨析" class="headerlink" title="Kafka中Topic、Partition、Groups、Brokers概念辨析"></a>Kafka中Topic、Partition、Groups、Brokers概念辨析</h1><h3 id="一、Topic和Partition"><a href="#一、Topic和Partition" class="headerlink" title="一、Topic和Partition"></a>一、Topic和Partition</h3><p>在Kafka中，Topic是一个逻辑概念，用于对数据流进行分类和组织。每个Topic可以包含多个Partition，Partition是物理概念，用于实现数据的高可用性和容错性。每个Partition对应一个或多个副本，副本分为领导者(leader)和追随者(follower)，领导者负责处理读写请求，追随者用于备份数据。如果领导者宕机，某个追随者会被选举为新的领导者。</p>
-<h3 id="二、Groups和Brokers"><a href="#二、Groups和Brokers" class="headerlink" title="二、Groups和Brokers"></a>二、Groups和Brokers</h3><p>Kafka<a target="_blank" rel="noopener" href="https://cloud.baidu.com/product/RabbitMQ.html">消息队列</a>有两种消费模式，分别是点对点模式和订阅&#x2F;发布模式。在订阅&#x2F;发布模式下，多个消费者可以组成一个Group来共享一个Topic的消息。消费者在Group中共享负载，共同消费Topic的消息。Brokers是Kafka集群中的实体，每个Broker负责<a target="_blank" rel="noopener" href="https://cloud.baidu.com/product/bos.html">存储</a>和管理Topic的Partition副本。Kafka集群将Topic的多个Partition分布在多个Broker上，以提高系统的可靠性和容错性。</p>
-<h3 id="三、实例解析"><a href="#三、实例解析" class="headerlink" title="三、实例解析"></a>三、实例解析</h3><p>为了更好地理解这些概念，我们可以举一个公路运输的例子。假设不同的起始点和目的地需要修不同高速公路（Topic），高速公路上可以提供多条车道（Partition），流量大的公路多修几条车道保证畅通，流量小的公路少修几条车道避免浪费。收费站好比消费者，车多的时候多开几个一起收费避免堵在路上，车少的时候开几个让汽车并道就好了。如果没有车道（Partition），一条公路（Topic）对应的车辆集在分布式集群服务组中，就会分布不均匀，即可能导致某段公路上的车辆很多，若此公路的车流量很大的情况下，该段公路就可能导致压力很大，吞吐也容易导致瓶颈。</p>
-<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><p>通过以上分析，我们可以得出以下结论：</p>
-<ol>
-<li>Topic是逻辑概念，用于对数据流进行分类和组织；Partition是物理概念，用于实现数据的高可用性和容错性；</li>
-<li>Groups是消费者组织形式，多个消费者组成一个Group共享一个Topic的消息；Brokers是Kafka集群中的实体，负责存储和管理Topic的Partition副本；</li>
-<li>Kafka通过Topic、Partition、Groups和Brokers的组合，实现了高效的分布式流处理平台。在实际应用中，需要根据业务需求合理配置这些参数，以获得最佳的性能和可靠性。</li>
-</ol>
+                <p>众所周知，longlong不开见祖宗，每年都有很多人因此而吃亏，包括我自己，long long int 的上界建议定为1e18</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;万能头
+#include&lt;bits&#x2F;stdc++.h&gt;
+ios::sync_with_stdio(false);
+cin.tie(0);
+cout.tie(0);</code></pre>
+
+
+
+<p>lower_bound返回数组中第一个大于等于k的迭代器，upper_bound返回数组中第一个大于k的迭代器,实现为二分，使用方法如下：</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">int an[]:1 1 1 2 2 3 3
+lower_bound(an,an+7,2)-an  &#x2F;&#x2F;为3
+upper_bound(an,an+7,2)-an  &#x2F;&#x2F;为4
+
+vector&lt;int&gt; an:1 1 1 2 2 3 3
+lower_bound(an,begin(),an.end(),2)-an.begin() &#x2F;&#x2F;为3
+upper_bound(an,begin(),an.end(),2)-an.begin() &#x2F;&#x2F;为4</code></pre>
+
+
+
+<p>double不够时用long double,注意printf的时候double用%.nlf,long double用%.nLf.</p>
+<p>一个vector类型的size是unsigned long long ,如果减去一个数为负数，会发生越界，注意要强制转化</p>
+<p>输出int时带前导0，比如<br>printf(“%05d”,res)<br>若res位数大于5，则输出res，否则前面补0输出5位</p>
+<p>自创数据：<br>新创一个cpp文件：</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">int main() &#123;
+	freopen(&quot;test.txt&quot;, &quot;w&quot;, stdout);
+	cout &lt;&lt; 1 &lt;&lt; &quot;\n&quot;;
+	return 0;
+&#125;</code></pre>
+
+
+
+
+<p>在代码文件里直接访问：</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">freopen(&quot;test.txt&quot;, &quot;r&quot;, stdin);</code></pre>
+
+
+
+<p>set容器使用：不允许重复，不排序</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">struct cmp&#123;
+    bool operator()(pi a,pi b) const
+    &#123;
+        if(a.x!&#x3D;b.x)
+        &#123;
+            return a.x&gt;b.x;&#x2F;&#x2F;按照第一个从大到小排列
+        &#125;
+        else&#123;
+            return a.y&lt;b.y;&#x2F;&#x2F;第一个相等的时候按照第二个元素从小到大排列
+        &#125;
+    &#125;
+&#125;;
+set&lt;pi,cmp&gt; g;&#x2F;&#x2F;也可以写成set&lt;pi,greater&lt;pi&gt;&gt; g;
+    g.insert(&#123;1,2&#125;);
+    g.insert(&#123;3,5&#125;);
+    g.insert(&#123;3,4&#125;);
+    g.insert(&#123;4,2&#125;);
+    g.erase(&#123;5,2&#125;);
+    for(auto it&#x3D;g.begin();it!&#x3D;g.end();it++)
+    &#123;
+        cout&lt;&lt;it-&gt;x&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;y&lt;&lt;&quot;\n&quot;;
+    &#125;
+</code></pre>
+
+<p>erase没有删除的时候不会报错<br>输出：<br>4 2<br>3 4<br>3 5<br>1 2</p>
+<p>multiset容器：允许重复的set，排序</p>
+<p>常用二维数组转化为一维：a和b必须是从0开始</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">int get(int a,int b)
+&#123;
+    return a*n+b;
+&#125;</code></pre>
+
+
+
+
+
+<p>在unordered_map中使用pair</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">struct pair_hash
+&#123;
+    template&lt;class T1, class T2&gt;
+    std::size_t operator() (const std::pair&lt;T1, T2&gt;&amp; p) const
+    &#123;
+        auto h1 &#x3D; std::hash&lt;T1&gt;&#123;&#125;(p.first);
+        auto h2 &#x3D; std::hash&lt;T2&gt;&#123;&#125;(p.second);
+        return h1 ^ h2;
+    &#125;
+&#125;;
+
+</code></pre>
+
+<p>map使用count来查看是否存在元素</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">unordered_map&lt;pair&lt;int, bool&gt;, int, pair_hash&gt; Map;
+pair&lt;int, int&gt; res &#x3D; &#123;1, 2&#125;;
+Map[res] &#x3D; 3;
+cout &lt;&lt; Map.count(&#123;1, 2&#125;);
+输出:1</code></pre>
+
+
+
+
+
+<p>全排列：</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">vector&lt;int &gt;a;
+	for (int i &#x3D; 1; i &lt;&#x3D; 5; i++)
+		a.push_back(i);
+	while (next_permutation(a.begin(), a.end())) &#123;
+		for (int i &#x3D; 0; i &lt; 5; i++)
+			cout &lt;&lt; a[i] &lt;&lt; &quot; &quot;;
+		cout &lt;&lt; &quot;\n&quot;;
+	&#125;</code></pre>
+
+
+
+
+<p>string的substr函数：<br>string a&#x3D;”abcd”<br>cout&lt;&lt;a.substr(0,2);<br>输出：从下标0开始的长度为2的子串，即“ab”<br>cout&lt;&lt;a.substr(1,3);<br>输出：从下标1开始的长度为3的子串，即“bcd”</p>
+<p>结构体排序：return ture则a在b前面</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">struct Stone &#123;
+	int s, e, l;
+&#125; stone[110];
+bool cmp(const Stone a, const Stone b) &#123;
+	int x &#x3D; a.s * b.l;
+	int y &#x3D; b.s * a.l;
+	if (x &#x3D;&#x3D; y)
+		return a.e &gt; b.e;
+	else
+		return x &lt; y;
+&#125;
+sort(an, an + n , cmp);</code></pre>
+
+
+
+
+
+<p>pair排序(使用sort)</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">bool cmp(pi a, pi b) &#123;
+	return a.first &lt; b.first;
+&#125;
+sort(an, an + n , cmp);&#x2F;&#x2F;从下标0到n排序，按照第一个元素从小到大排序</code></pre>
+
+
+
+
+
+<p>优先队列对结构体建立小根堆（队头为最小值）需要重载大于号</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">struct node &#123;
+	int dist, u, type;
+	bool operator&gt;(const node a) const &#123;
+		return dist &gt; a.dist;
+	&#125;
+&#125;;
+priority_queue&lt;node, vector&lt;node&gt;, greater&lt;node&gt;&gt; heap;</code></pre>
+
+
+
+
+
+<p>优先队列对结构体建立大根堆（队头为最大值）需要重载小于号</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">struct node &#123;
+	int dist, u, type;
+	bool operator&lt;(const node a) const &#123;
+		return dist &lt; a.dist;
+	&#125;
+&#125;;
+priority_queue&lt;node, vector&lt;node&gt;, less&lt;node&gt;&gt; heap;</code></pre>
+
+
+
+<p>注意auto修改值的时候要加&amp;</p>
+<p>unordered_map<string bool> ans;<br>初始化为bool是false</string></p>
+<p>若二维数组为局部变量，各元素的值不确定。例如：一个局部变量a[4][4]未初始化值<br>若二维数组为全局变量，各元素的值编译器会默认初始化为0;例如：全局变量a[4][4]未初始化</p>
+<p>结构体初始化：需要有默认形参，不然定义结构体数组会报错。</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">struct ddata&#123;
+    int d,u,r;
+    ddata(int dd&#x3D;0,int uu&#x3D;0,int rr&#x3D;0):d(dd),u(uu),r(rr)&#123;&#125;
+&#125;;</code></pre>
+
+
+
+<p>位运算<br>求x的二进制的第k位：</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">x&gt;&gt;k&amp;1;</code></pre>
+
+
+<p>比如：10010&gt;&gt;3&amp;1  为0</p>
+<p>返回x的最后一个1：</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">
+int lowbit(int a)
+&#123;
+       return a&amp;-a;
+&#125;
+lowbit(x)</code></pre>
+
+
+
+
+<p>lowbit常用于树状数组</p>
+<p>比如：lowbit(18):2(18为10010即返回10)</p>
+<p>memset使用：<br>int:<br>-1 0 为本值<br>127为INT_MAX，0x3f为较大值，且值为0x3f3f3f3f<br>128为INT_MIN<br>double:<br>0x7f为最大值，0xfe为最小值<br>0x42为很大值，0xc2为很小值</p>
+<p>精度问题：<br>使用double时候如果出现分数，可能导致相等的两个数不一样，用equal函数查看a和b是否相等：</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">bool equal(double a, double b) &#123;
+	if (fabs(a - b) &lt; eps)
+		return true;
+	return false;
+&#125;</code></pre>
+
+
+
+<p>大顶堆：top是最大值</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">#define x first
+#define y second
+struct cmp &#123;
+	bool operator()(pi a, pi b) &#123;
+		return a.x &gt; b.x;
+	&#125;
+&#125;;
+typedef pair&lt;int,int&gt; pi;
+priority_queue&lt;pi,vector&lt;pi&gt;,cmp&gt; heap;</code></pre>
+
+
+
+<p>include<sstream>的stringstream用法：	</sstream></p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">getline(cin, line);
+string str &#x3D; &quot;hello world I am very happy!&quot;;
+stringstream sstream(str);                                              
+while (sstream) &#123;
+string substr;
+sstream &gt;&gt; substr;
+
+cout &lt;&lt; substr &lt;&lt; endl;
+&#125;
+输出：
+hello
+world
+I
+am
+very
+happy!</code></pre>
+
+
+
+
 
                 
             </div>
@@ -441,7 +671,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://dianayyds.github.io/2024/05/03/kafka-knowledge/">https://dianayyds.github.io/2024/05/03/kafka-knowledge/</a>
+                    <a href="https://dianayyds.github.io/2024/07/27/suan-fa-xiao-ji-qiao/">https://dianayyds.github.io/2024/07/27/suan-fa-xiao-ji-qiao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -793,31 +1023,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/06/04/rl/">
+                <a href="/2024/07/27/dong-tai-gui-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="RL">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="动态规划">
                         
-                        <span class="card-title">RL</span>
+                        <span class="card-title">动态规划</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            强化学习
+                            动态规划在算法中属于非常常见的类型，但想要熟练掌握仍需要下一番功夫
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-06-04
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-07-27
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    强化学习
+                            <a href="/categories/algorithm/" class="post-category">
+                                    algorithm
                                 </a>
                             
                             
@@ -834,31 +1064,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/05/03/kafka-question/">
+                <a href="/2024/07/27/tu-lun/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Kafka面经">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="图论">
                         
-                        <span class="card-title">Kafka面经</span>
+                        <span class="card-title">图论</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是kafka？
+                            图是计算机中常用的一种存储结构，图论是数学的一个分支，研究图上的优化算法。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-05-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-27
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Kafka/" class="post-category">
-                                    Kafka
+                            <a href="/categories/algorithm/" class="post-category">
+                                    algorithm
                                 </a>
                             
                             
