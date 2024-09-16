@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="RL, Go,Python,算法,Linux,深度学习">
-    <meta name="description" content="强化学习">
+    <meta name="keywords" content="channel, Go,Python,算法,Linux,深度学习">
+    <meta name="description" content="channel 是一个信道，用于端到端数据的通信，常用于 goroutine 之间数据共享。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>RL | 九日的个人博客</title>
+    <title>channel | 九日的个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -332,12 +332,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">RL</h1>
+                    <h1 class="description center-align post-title">channel</h1>
                 </div>
             </div>
         </div>
@@ -369,8 +369,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                强化学习
+                            <a href="/categories/Golang%E5%BF%85%E5%AD%A6%E6%A6%82%E5%BF%B5/" class="post-category">
+                                Golang必学概念
                             </a>
                         
                     </div>
@@ -382,7 +382,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-06-04
+                    2024-09-16
                 </div>
                 
 
@@ -406,8 +406,59 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="什么是强化学习-强化学习的基本概念"><a href="#什么是强化学习-强化学习的基本概念" class="headerlink" title="什么是强化学习?强化学习的基本概念"></a>什么是强化学习?强化学习的基本概念</h3><p>强化学习是机器学习领域的一类学习问题，它与常见的有监督学习、无监督学习等的最大不同之处在于，它是通过与环境之间的交互和反馈来学习的。正如一个新生的婴儿一样，它通过哭闹、吮吸、爬走等来对环境进行探索，并且慢慢地积累起对于环境的感知，从而一步步学习到环境的特性使得自己的行动能够尽快达成自己的愿望。再比如，这也同我们学习下围棋的模式类似，我们通过和不同的对手一盘一盘得对弈，慢慢积累起来我们对于每一步落子的判断，从而慢慢地提高自身的围棋水平。由DeepMind研发的AlphaGo围棋程序在训练学习的过程中就用到了强化学习的技术。</p>
-<p>下面让我们来正式地定义一下强化学习问题。强化学习的基本模型就是个体-环境的交互。<em><strong>个体&#x2F;智能体</strong></em>（agent）就是能够采取一系列行动并且期望获得较高收益或者达到某一目标的部分，比如我们前面例子中的新生婴儿或者在学习下围棋的玩家。而与此相关的另外的部分我们都统一称作<em><strong>环境</strong></em>（environment），比如前面例子中的婴儿的环境（比如包括其周围的房间以及婴儿的父母等）或者是你面前的棋盘以及对手。整个过程将其离散化为不同的时刻（time step）。在每个时刻环境和个体都会产生相应的交互。个体可以采取一定的<em><strong>行动</strong></em>（action），这样的行动是施加在环境中的。环境在接受到个体的行动之后，会反馈给个体环境目前的<em><strong>状态</strong></em>（state）以及由于上一个行动而产生的<em><strong>奖励</strong></em>（reward）。其中值得注意的一点是，这样个体-环境的划分并不一定是按照实体的临近关系划分，比如在动物行为学上上，动物获得的奖励其实可能来自于其自身大脑中的化学物质的分泌，因此这时动物大脑中实现这一奖励机制的部分，也应该被划分为环境；而个体就仅仅只包括接受信号并且做出决定的部分。</p>
+                <h3 id="创建channel"><a href="#创建channel" class="headerlink" title="创建channel"></a>创建channel</h3><pre class="language-go" data-language="go"><code class="language-go">ch1 <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> T<span class="token punctuation">)</span> <span class="token comment">// 无缓冲</span>
+
+ch2 <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> T<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">// 带缓冲</span></code></pre>
+
+<p>T为数据类型</p>
+<p>注意</p>
+<ul>
+<li>无缓冲区的信道会被阻塞直到数据被接收</li>
+<li>有缓冲区的信道在发送的数据达到缓冲区大小后才会被阻塞</li>
+</ul>
+<h3 id="发送接收数据"><a href="#发送接收数据" class="headerlink" title="发送接收数据"></a>发送接收数据</h3><p>使用 <code>&lt;-</code> 指向 channel 表示发送数据到该 channel, 如 <code>ch &lt;- 10</code></p>
+<p>使用 <code>&lt;-</code> 在 channel 左侧表示接收数据，如 <code>&lt;-ch</code></p>
+<h3 id="关闭channel"><a href="#关闭channel" class="headerlink" title="关闭channel"></a>关闭channel</h3><p>使用 <code>close()</code> 关闭 <code>channel</code></p>
+<pre class="language-go" data-language="go"><code class="language-go"><span class="token function">close</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span></code></pre>
+
+<p>注意</p>
+<ul>
+<li>如果往一个已经 <code>close()</code> 的 <code>channel</code> 发送消息，会产生 <code>panic</code></li>
+<li>读取已关闭的 <code>channel</code> 可以获得零值, 若使用 <code>range</code> 读取 <code>channel</code>, 则 <code>close</code> 后会终止循环</li>
+</ul>
+<p>我们可以使用 <code>val, ok := &lt;- ch</code> 来判断是否是零值，若 <code>ok</code> 为 <code>false</code> 则信道已经 <code>close</code></p>
+<h3 id="Select"><a href="#Select" class="headerlink" title="Select"></a>Select</h3><p>通常我们会使用 <code>select</code> 来接收 <code>channel</code> 的数据, 还可以使用 <code>default</code> 设定默认执行的动作, <code>select</code> 可以同时接收多个 <code>channel</code> ，若多个 <code>channel</code> 同时发送过来数据，则会随机选择一个 <code>channel</code> 完成操作</p>
+<pre class="language-go" data-language="go"><code class="language-go"><span class="token keyword">select</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ch1<span class="token punctuation">:</span>  <span class="token comment">// 接收 ch1 的数据</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"ch1"</span><span class="token punctuation">)</span>  
+    <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ch2<span class="token punctuation">:</span> <span class="token comment">// 接收 ch2 的数据</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"ch2"</span><span class="token punctuation">)</span>
+    <span class="token keyword">case</span> val <span class="token operator">:=</span> <span class="token operator">&lt;-</span>ch3<span class="token punctuation">:</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>ch3<span class="token punctuation">)</span> <span class="token comment">//接收 ch3 的数据并打印</span>
+    <span class="token keyword">default</span><span class="token punctuation">:</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"default"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<h2 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h2><p>定时器就是通过 <code>channel</code> 实现了定时结果的返回</p>
+<pre class="language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"time"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">NewTicker</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">*</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"start"</span><span class="token punctuation">)</span>
+	<span class="token operator">&lt;-</span>t<span class="token punctuation">.</span>C
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"finish"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<p>程序启动后会在三秒时准时结束。</p>
 
                 
             </div>
@@ -434,7 +485,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://dianayyds.github.io/2024/06/04/rl/">https://dianayyds.github.io/2024/06/04/rl/</a>
+                    <a href="https://dianayyds.github.io/2024/09/16/channel/">https://dianayyds.github.io/2024/09/16/channel/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -786,31 +837,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/07/20/deeplearning1/">
+                <a href="/2024/09/16/context/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="深度学习实验">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Context">
                         
-                        <span class="card-title">深度学习实验</span>
+                        <span class="card-title">Context</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            介绍一些pytorch的一些操作，然后实现线性回归和softmax回归
+                            Context 是 golang 中十分重要的接口，用于定义 goroutine 中的上下文信息
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-07-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-09-16
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    深度学习
+                            <a href="/categories/Golang%E5%BF%85%E5%AD%A6%E6%A6%82%E5%BF%B5/" class="post-category">
+                                    Golang必学概念
                                 </a>
                             
                             
@@ -827,31 +878,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/05/03/kafka-knowledge/">
+                <a href="/2024/09/16/goroutine/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Kafka知识点">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Goroutine">
                         
-                        <span class="card-title">Kafka知识点</span>
+                        <span class="card-title">Goroutine</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Topic、Partition、Groups、Brokers概念辨析
+                            Goroutine 是 Go 语言的并发编程模型，它是一种轻量级的线程，由 Go 运行时管理，我们也可以称之为协程。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-05-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-16
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Kafka/" class="post-category">
-                                    Kafka
+                            <a href="/categories/Golang%E5%BF%85%E5%AD%A6%E6%A6%82%E5%BF%B5/" class="post-category">
+                                    Golang必学概念
                                 </a>
                             
                             
