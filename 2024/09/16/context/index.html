@@ -346,7 +346,7 @@
 <li>超时管理： 通过配置超时时间，可以方便地配置协程的终止时间</li>
 <li>终止协程： 通过使用 <code>cancel()</code> 方法，协程s可以很方便地终止，可以批量管理多个协程的终止</li>
 </ul>
-<h3 id><a href="#" class="headerlink" title></a></h3><h3 id="根节点和派生结点"><a href="#根节点和派生结点" class="headerlink" title="根节点和派生结点"></a>根节点和派生结点</h3><p>我们可以为 <code>context</code> 创建根节点和派生节点，为树形结构，当根节点被 <code>cancel()</code> 或超时终止时，它的所有派生节点也会被终止，根节点的数据也会被所有派生节点共享。</p>
+<h3 id="根节点和派生结点"><a href="#根节点和派生结点" class="headerlink" title="根节点和派生结点"></a>根节点和派生结点</h3><p>我们可以为 <code>context</code> 创建根节点和派生节点，为树形结构，当根节点被 <code>cancel()</code> 或超时终止时，它的所有派生节点也会被终止，根节点的数据也会被所有派生节点共享。</p>
 <p><img src="/2024/09/16/context/context.png" alt="context"></p>
 <h3 id="创建根节点"><a href="#创建根节点" class="headerlink" title="创建根节点"></a>创建根节点</h3><pre class="language-go" data-language="go"><code class="language-go">ctx <span class="token operator">:=</span> context<span class="token punctuation">.</span><span class="token function">Background</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 创建空白 context</span>
 
