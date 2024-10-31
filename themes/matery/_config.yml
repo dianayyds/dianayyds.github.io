@@ -4,9 +4,9 @@ menu:
   Index:
     url: /
     icon: fas fa-home
-  Tags:
-    url: /tags
-    icon: fas fa-tags
+  # Tags:
+  #   url: /tags
+  #   icon: fas fa-tags
   Categories:
     url: /categories
     icon: fas fa-bookmark
@@ -16,12 +16,12 @@ menu:
   About:
     url: /about
     icon: fas fa-user-circle
-  Contact:
-    url: /contact
-    icon: fas fa-comments
-  Friends:
-    url: /friends
-    icon: fas fa-address-book
+  # Contact:
+  #   url: /contact
+  #   icon: fas fa-comments
+  # Friends:
+  #   url: /friends
+  #   icon: fas fa-address-book
 
   # 二级菜单写法如下
   #Medias:
@@ -245,17 +245,17 @@ sakura:
 
 # 是否激活页面鼠标星星跟随效果, 只在桌面版网页启用特效
 mouseStar:
-  enable: false
+  enable: true
 
   # 是否激活页面飘雪效果, 只在桌面版网页启用特效
 snowdown:
-  enable: true
+  enable: false
 
 # profile in about page, including avatars, career, and personal introductions.
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
   avatar: /medias/avatar.jpg
-  career: 北京交通大学研究生
+  career: 北京交通大学计科研究生
   introduction: 一个热爱编程的小白，喜欢折腾各种技术，欢迎大家一起交流学习。
 
 # config my projects informations in about page.
@@ -264,21 +264,22 @@ profile:
 myProjects:
   enable: true
   data:
-    hexo-theme-matery:
-      icon: fas fa-file-alt
-      iconBackground: 'linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)'
-      url: http://github.com/blinkfox/hexo-theme-matery
-      desc: This is a Hexo blog theme with 'Material Design' and responsive design.
-    Fenix:
-        icon: fas fa-database
-        iconBackground: 'linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)'
-        url: https://github.com/blinkfox/fenix
-        desc: 这是 Spring Data JPA 复杂或动态 SQL 查询的扩展库。
-    typora-vue-theme:
+    仿12306铁路调度系统:
         icon: fas fa-file-alt
         iconBackground: 'linear-gradient(to bottom right, #29B6F6 0%, #1E88E5 100%)'
-        url: https://github.com/blinkfox/typora-vue-theme
-        desc: This is a typora theme inspired by Vue document style.
+        url: https://github.com/dianayyds/database-final-work.st
+        desc: 数据库大作业:仿12306铁路调度系统
+    GPU-frontend:
+      icon: fas fa-file-alt
+      iconBackground: 'linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)'
+      url: https://github.com/dianayyds/GPU-frontend
+      desc: 毕设《GPU服务器资源检测系统》前端
+    GPU-backend:
+        icon: fas fa-database
+        iconBackground: 'linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)'
+        url: https://github.com/dianayyds/GPU-backend
+        desc: 毕设《GPU服务器资源检测系统》后端
+    
 
 # config my skills informations in about page.
 # If you don't want to display this `My Skills` content, you can deactivate or delete this configuration.
@@ -286,30 +287,38 @@ myProjects:
 mySkills:
   enable: true
   data:
-    Java:
+    Golang:
       background: 'linear-gradient(to right, #FF0066 0%, #FF00CC 100%)'
       percent: 85%
-    JavaScript:
-      background: 'linear-gradient(to right, #9900FF 0%, #CC66FF 100%)'
-      percent: 80%
-    HTML5:
-      background: 'linear-gradient(to right, #2196F3 0%, #42A5F5 100%)'
-      percent: 80%
-    CSS:
-      background: 'linear-gradient(to right, #00BCD4 0%, #80DEEA 100%)'
-      percent: 70%
-    SQL:
-      background: 'linear-gradient(to right, #4CAF50 0%, #81C784 100%)'
-      percent: 90%
-    程序设计:
+    VUE:
       background: 'linear-gradient(to right, #FFEB3B 0%, #FFF176 100%)'
       percent: 75%
+    SQL:
+      background: 'linear-gradient(to right, #4CAF50 0%, #81C784 100%)'
+      percent: 65%
+    C++:
+      background: 'linear-gradient(to right, #9900FF 0%, #CC66FF 100%)'
+      percent: 65%
+    Python:
+      background: 'linear-gradient(to right, #2196F3 0%, #42A5F5 100%)'
+      percent: 60%
+    HTML:
+      background: 'linear-gradient(to right, #2196F3 0%, #42A5F5 100%)'
+      percent: 55%
+    CSS:
+      background: 'linear-gradient(to right, #00BCD4 0%, #80DEEA 100%)'
+      percent: 50%
+    JavaScript:
+      background: 'linear-gradient(to right, #9900FF 0%, #CC66FF 100%)'
+      percent: 40%
+    
+    
 
 # config gallery of my photos in about page.
 # If you don't want to display this `Gallery` content, you can deactivate or delete this configuration.
 # 在“关于”页面配置"我的相册"图片，如果你不需要这些信息则可以将其设置为不激活或者将其删除.
 myGallery:
-  enable: true
+  enable: false
   data:
     - /medias/featureimages/0.jpg
     - /medias/featureimages/1.jpg
