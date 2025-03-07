@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="vqvae, Go,Python,算法,Linux,深度学习">
-    <meta name="description" content="vqvae前向计算的步骤解析">
+    <meta name="description" content="vqvae前向计算步骤解析">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -341,7 +341,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>VQVAE的流程图如下：</p>
-<img src="/2025/02/10/vqvae/image-20250210160314814.png" alt="image-20250210160314814" style="zoom: 33%;">
+<img src="/2025/02/10/vqvae/image-20250210160314814.png" style="zoom: 33%;">
 
 <p>VQVQE的模型搭建如下，其中ResidualBlock是残差块，用于缓解梯度消失和梯度爆炸</p>
 <pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">VQVAE</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -394,10 +394,10 @@ zq <span class="token operator">=</span> self<span class="token punctuation">.</
 decoder_input <span class="token operator">=</span> ze <span class="token operator">+</span> <span class="token punctuation">(</span>zq <span class="token operator">-</span> ze<span class="token punctuation">)</span><span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 
 <p>MNIST重建图像：</p>
-<img src="/2025/02/10/vqvae/image-20250211161322458.png" alt="image-20250211161322458" style="zoom:67%;">
+<img src="/2025/02/10/vqvae/image-20250211161322458.png" style="zoom:67%;">
 
 <p>MNIST生成图像：</p>
-<img src="/2025/02/10/vqvae/image-20250211161523434.png" alt="image-20250211161523434" style="zoom:50%;">
+<img src="/2025/02/10/vqvae/image-20250211161523434.png" style="zoom:50%;">
 
                 
             </div>
@@ -780,9 +780,9 @@ decoder_input <span class="token operator">=</span> ze <span class="token operat
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="向量知识库">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="大模型外挂向量知识库">
                         
-                        <span class="card-title">向量知识库</span>
+                        <span class="card-title">大模型外挂向量知识库</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -829,7 +829,7 @@ decoder_input <span class="token operator">=</span> ze <span class="token operat
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            GAN基本流程以及代码实现
+                            GAN基本流程
                         
                     </div>
                     <div class="publish-info">

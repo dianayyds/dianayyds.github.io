@@ -344,7 +344,7 @@
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">docker</span> run hello-world</code></pre>
 
 <p>如果出现如图所示的输出，那么docker环境就配置好了。</p>
-<img src="/2025/03/07/milvus-an-zhuang/image-20250307121258115.png" alt="image-20250307121258115" style="zoom: 33%;">
+<img src="/2025/03/07/milvus-an-zhuang/image-20250307121258115.png">
 
 <h4 id="开始安装milvus"><a href="#开始安装milvus" class="headerlink" title="开始安装milvus"></a>开始安装milvus</h4><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> milvus2
 
@@ -353,8 +353,6 @@
 <span class="token function">wget</span> https://github.com/milvus-io/milvus/releases/download/v2.2.13/milvus-standalone-docker-compose.yml <span class="token parameter variable">-O</span> docker-compose.yml</code></pre>
 
 <p><img src="/2025/03/07/milvus-an-zhuang/image-20250307121707310.png"></p>
-<pre class="language-none"><code class="language-none">sudo docker-compose up -d</code></pre>
-
 <p> 查看当前文件夹，会出现一个名为docker-compose.yml的文件，打开这个文件（任意方式打开都行，记事本，vscode等等能编辑的都行，会用vim当然更好），把下面这一段粘贴进去（这里attu的版本是2.2.8，和前面安装milvus版本2.2.13是相互对应的，我试过很多版本，目前就这俩亲测好用）</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash">attu:
     container_name: attu
@@ -367,18 +365,18 @@
       - <span class="token string">"standalone"</span></code></pre>
 
 <p>格式参考截图，attu需要和上面的standalone在同一列</p>
-<img src="/2025/03/07/milvus-an-zhuang/image-20250307122121078.png" alt="image-20250307122121078" style="zoom:33%;">
+<img src="/2025/03/07/milvus-an-zhuang/image-20250307122121078.png">
 
 <p>记得保存修改，然后回到之前的命令行</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span></code></pre>
 
-<p><img src="/2025/03/07/milvus-an-zhuang/image-20250307122416837.png" alt="image-20250307122416837"></p>
+<p><img src="/2025/03/07/milvus-an-zhuang/image-20250307122416837.png"></p>
 <p>​	验证连接</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> port milvus-standalone <span class="token number">19530</span>/tcp</code></pre>
 
-<p><img src="/2025/03/07/milvus-an-zhuang/image-20250307122718107.png" alt="image-20250307122718107"></p>
+<p><img src="/2025/03/07/milvus-an-zhuang/image-20250307122718107.png"></p>
 <p>在浏览器输入 <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000</a> 进入attu可视化界面，完成</p>
-<p><img src="/2025/03/07/milvus-an-zhuang/image-20250307122854318.png" alt="image-20250307122854318"></p>
+<p><img src="/2025/03/07/milvus-an-zhuang/image-20250307122854318.png"></p>
 
                 
             </div>
@@ -800,31 +798,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/03/04/xin-dao-xiang-liang-hua-diao-yan/">
+                <a href="/2025/02/16/da-mo-xing-wai-gua-xiang-liang-zhi-shi-ku/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="信道向量化调研">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="大模型外挂向量知识库">
                         
-                        <span class="card-title">信道向量化调研</span>
+                        <span class="card-title">大模型外挂向量知识库</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            信道如何被向量化表示？
+                            什么是大模型外挂向量知识库？
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-16
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%B0%83%E7%A0%94/" class="post-category">
-                                    调研
+                            <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A4%96%E6%8C%82%E5%90%91%E9%87%8F%E7%9F%A5%E8%AF%86%E5%BA%93/" class="post-category">
+                                    大模型外挂向量知识库
                                 </a>
                             
                             
