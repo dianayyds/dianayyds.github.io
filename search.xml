@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>图像重建指标(mse+psnr+ssim)</title>
+      <link href="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/"/>
+      <url>/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/</url>
+      
+        <content type="html"><![CDATA[<p><strong>MSE: Mean Square Error，均方误差</strong></p><p>假设现在有两个图像，名字分别是X和Y，其中的元素分别记为x<del>i</del>,y<del>i</del>,元素总数为N，那么MSE的计算公式为：</p><img src="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/图像重建指标-mse-psnr-ssim/image-20250413143555458.png" alt="image-20250413143555458" style="zoom:33%;"><p>也就是最简单的逐元素比较，MSE越小说明两个图像越相近，重建质量越好。</p><p><strong>PSNR: Peak Signal to Noise Ratio，峰值信噪比</strong></p><p>PSNE是基于MSE得到的，其计算公式为：</p><img src="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/图像重建指标-mse-psnr-ssim/image-20250413143951708.png" alt="image-20250413143951708" style="zoom:33%;"><p>其中MAX<del>I</del>是一个常数，表示图像最大动态范围，如果是float型，是1，如果是int8型，是255。</p><p>因为MSE放在了分母上，所以PSNR越大越好，在我阅读的文献中，一般30以上算是比较好的结果了。</p><p>MSE与PSNR的问题是，在计算每个位置上的像素差异时，其结果仅与当前位置的两个像素值有关，与其它任何位置上的像素无关。这也就是说，这种计算差异的方式仅仅将图像看成了一个个孤立的像素点，而忽略了图像内容所包含的一些视觉特征，特别是图像的局部语义信息。而图像质量的好坏极大程度上是一个主观感受，其中语义信息对人主观感受的影响非常之大。</p><p><strong>在介绍SSIM的计算公式前，有几个基本指标要介绍：</strong></p><p>均值：</p><img src="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/图像重建指标-mse-psnr-ssim/image-20250413144511465.png" alt="image-20250413144511465" style="zoom:33%;"><p>标准差：</p><img src="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/图像重建指标-mse-psnr-ssim/image-20250413144527476.png" alt="image-20250413144527476" style="zoom:33%;"><p>假设我们有另外一个图像块，像素数目也为N，其中的元素记为y<del>i</del>， 那么两个图像块减去均值后的余弦相似度公式为：</p><img src="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/图像重建指标-mse-psnr-ssim/image-20250413144632871.png" alt="image-20250413144632871" style="zoom: 33%;"><p>其中σ<del>xy</del>表示协方差</p><img src="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/图像重建指标-mse-psnr-ssim/image-20250413144731442.png" alt="image-20250413144731442" style="zoom:33%;"><p>SSIM的公式为：</p><img src="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/图像重建指标-mse-psnr-ssim/image-20250413144804892.png" alt="image-20250413144804892" style="zoom:33%;"><p>其中</p><img src="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/图像重建指标-mse-psnr-ssim/image-20250413144928535.png" alt="image-20250413144928535" style="zoom:33%;"><img src="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/图像重建指标-mse-psnr-ssim/image-20250413144905343.png" alt="image-20250413144905343" style="zoom:33%;"><p>实际计算时，K<del>1</del>一般取0.01，k<del>2</del>一般取0.03</p><p>特别注意：按照上述方法，我们计算得到了一个图像块的SSIM值，在实际计算时，一个图像块通常取成正方形，然后将该SSIM值赋给图像块的中心位置。然后滑动这个正方形块，可以得到其他所有位置的SSIM值，于是我们就得到了一个SSIM图。然而在实际中，我们对两张图像进行计算得到的通常是一个SSIM值，这个值在文章中称为mean SSIM（MSSIM），计算方法是对SSIM图取平均：</p><img src="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/图像重建指标-mse-psnr-ssim/image-20250413145412737.png" alt="image-20250413145412737" style="zoom: 33%;">]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>milvus安装</title>
       <link href="/2025/03/07/milvus-an-zhuang/"/>
       <url>/2025/03/07/milvus-an-zhuang/</url>
