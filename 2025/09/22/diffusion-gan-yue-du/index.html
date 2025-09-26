@@ -4,12 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CDDM公式汇总, Go,Python,算法,Linux,深度学习">
-    <meta name="description" content="rayleigh信道下MMSE均衡：
-x_t = x_hat * (torch.conj(h)) / (torch.abs(h) ** 2 + sigma_square_fix)
+    <meta name="keywords" content="diffusion-GAN阅读, Go,Python,算法,Linux,深度学习">
+    <meta name="description" content="本文参考：Denoising Diffusion GANs阅读笔记
+动机：
+当下的生成学习框架中“高采样质量”、“模式覆盖与多样性”、“快速低计算开销的采样“这三点无法同时满足
 
-数学解释：
-x̂ = y × h* / (|h|² + σ">
+
+可以看到Gan在采样质量和速度上做的比较好，但在多样性上差">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +22,7 @@ x̂ = y × h* / (|h|² + σ">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CDDM公式汇总 | 九日的个人博客</title>
+    <title>diffusion-GAN阅读 | 九日的个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -270,12 +271,12 @@ x̂ = y × h* / (|h|² + σ">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CDDM公式汇总</h1>
+                    <h1 class="description center-align post-title">diffusion-GAN阅读</h1>
                 </div>
             </div>
         </div>
@@ -311,7 +312,7 @@ x̂ = y × h* / (|h|² + σ">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-09-01
+                    2025-09-22
                 </div>
                 
 
@@ -335,97 +336,29 @@ x̂ = y × h* / (|h|² + σ">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>rayleigh信道下MMSE均衡：</p>
-<pre class="language-python" data-language="python"><code class="language-python">x_t <span class="token operator">=</span> x_hat <span class="token operator">*</span> <span class="token punctuation">(</span>torch<span class="token punctuation">.</span>conj<span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>torch<span class="token punctuation">.</span><span class="token builtin">abs</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">+</span> sigma_square_fix<span class="token punctuation">)</span></code></pre>
+                <p>本文参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/503932823">Denoising Diffusion GANs阅读笔记</a></p>
+<p>动机：</p>
+<p>当下的生成学习框架中“高采样质量”、“模式覆盖与多样性”、“快速低计算开销的采样“这三点无法同时满足</p>
+<img src="/2025/09/22/diffusion-gan-yue-du/v2-e18b93ddfc0de33e9a5c098ca5f3b601_r.jpg" style="zoom:50%;">
 
-<p>数学解释：</p>
-<p><code>x̂ = y × h* / (|h|² + σ²)</code></p>
-<p><strong>符号说明：</strong></p>
-<ul>
-<li><code>x̂</code>：估计的发送信号（<code> x_t</code>）</li>
-<li><code>y</code>：接收信号</li>
-<li><code>h*</code>：信道增益的复共轭（<code>torch.conj(h)</code>）</li>
-<li><code> |h|²</code>：信道增益的模长平方（<code>torch.abs(h) ** 2</code>）</li>
-<li><code>σ²</code>：噪声方差（<code>sigma_square_fix</code>）</li>
-</ul>
-<p>CDDM中实现了从信道条件（SNR）到扩散时间步（t）的智能映射，这是CDDM相比传统扩散模型的重要创新，下面是线性调度相关代码。</p>
-<pre class="language-python" data-language="python"><code class="language-python">self<span class="token punctuation">.</span>register_buffer<span class="token punctuation">(</span><span class="token string">'betas'</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span>beta_1<span class="token punctuation">,</span> beta_T<span class="token punctuation">,</span> T<span class="token punctuation">)</span><span class="token punctuation">.</span>double<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">#beta_1=1e-4 beta_T=0.02 T=1000 </span>
-alphas <span class="token operator">=</span> <span class="token number">1.</span> <span class="token operator">-</span> self<span class="token punctuation">.</span>betas
-alphas_bar <span class="token operator">=</span> torch<span class="token punctuation">.</span>cumprod<span class="token punctuation">(</span>alphas<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">#累乘</span>
-self<span class="token punctuation">.</span>register_buffer<span class="token punctuation">(</span><span class="token string">'snr'</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span> <span class="token operator">*</span> torch<span class="token punctuation">.</span>log10<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> alphas_bar<span class="token punctuation">)</span> <span class="token operator">/</span> alphas_bar<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>可以看到Gan在采样质量和速度上做的比较好，但在多样性上差一些；而DDPM在高采样质量的前提下还拥有了多样性，但是采样速度是比较慢的。</p>
+<p><strong>为什么DDPM的采样步数多呢</strong>？在<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/503932823">Denoising Diffusion GANs阅读笔记</a>中有明确的公式推导，我简单概括一下，由于DDPM把正向扩散定义为逐步加<strong>零均值高斯噪声</strong>的马尔可夫过程，当每一步的方差 βt足够小时，可由贝叶斯&#x2F;局部近似得到：<strong>反向条件分布</strong>也可被高斯很好地逼近，这样建模反向采样就很方便。</p>
+<p><img src="/2025/09/22/diffusion-gan-yue-du/image-20250923114333744.png" alt="反向采样"></p>
+<p>下面这张图的第一行从左往右，展示了随着给原数据加噪，数据的概率分布逐渐倾向于高斯分布，第二行从右往左，分别展示了跨越一步、二步、一直到五步的去噪条件分布，可以看到随着去噪的步数增加，从高斯分布逐渐变成多模态的复杂分布，不利于建模求解。</p>
+<img src="/2025/09/22/diffusion-gan-yue-du/v2-924d66e448d6e6afa87ddf4d8b72f289_r.jpg" style="zoom:50%;">
 
-<p><strong>符号说明：</strong></p>
-<p><code>β_t</code> &#x3D; 噪声调度参数 (从<code> β_1</code> 到 <code>β_T </code>线性增长)<br><code>α_t </code>&#x3D; 1 - <code>β_t</code><br><code>ᾱ_t</code> &#x3D; ∏(i&#x3D;1 to t) α_i  # 累积乘积</p>
-<p>数值举例：</p>
-<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
 
-T <span class="token operator">=</span> <span class="token number">1000</span>
-beta_1<span class="token punctuation">,</span> beta_T <span class="token operator">=</span> <span class="token number">1e-4</span><span class="token punctuation">,</span> <span class="token number">0.02</span>
 
-<span class="token comment"># 1. 噪声调度</span>
-betas <span class="token operator">=</span> torch<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span>beta_1<span class="token punctuation">,</span> beta_T<span class="token punctuation">,</span> T<span class="token punctuation">)</span>
-<span class="token comment"># betas = [0.0001, 0.0001, ..., 0.0199, 0.0200]</span>
+<p><strong>Denoising Diffusion GAN的设定</strong></p>
+<p>为了减少采样步数，这篇论文做出假设，总步数T更小（&lt;&#x3D;8）。每个扩散步的噪声调度更大，具体的GAN训练过程见原回答，我主要总结一下如何建模去噪的多模态分布。作者指出，原始DDPM论文没有明说，但实际上可以解读为如下过程：先使用去噪模型预测x0 ,再用已知的xt和预测出的x0来从后验分布中采样得到xt-1.</p>
+<p><img src="/2025/09/22/diffusion-gan-yue-du/image-20250923140027168.png" alt="真后验"></p>
+<p>其中</p>
+<img src="/2025/09/22/diffusion-gan-yue-du/image-20250923140045455.png" style="zoom:50%;">
 
-<span class="token comment"># 2. 计算alphas</span>
-alphas <span class="token operator">=</span> <span class="token number">1.</span> <span class="token operator">-</span> betas
-<span class="token comment"># alphas = [0.9999, 0.9999, ..., 0.9801, 0.9800]</span>
 
-<span class="token comment"># 3. 累积乘积</span>
-alphas_bar <span class="token operator">=</span> torch<span class="token punctuation">.</span>cumprod<span class="token punctuation">(</span>alphas<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
-<span class="token comment"># alphas_bar[0] ≈ 0.9999</span>
-<span class="token comment"># alphas_bar[500] ≈ 0.5</span>
-<span class="token comment"># alphas_bar[999] ≈ 0.001</span>
 
-<span class="token comment"># 4. 计算SNR</span>
-snr <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">10</span> <span class="token operator">*</span> torch<span class="token punctuation">.</span>log10<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> alphas_bar<span class="token punctuation">)</span> <span class="token operator">/</span> alphas_bar<span class="token punctuation">)</span>
-
-<span class="token comment"># 可以打印部分关键点</span>
-key_steps <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">,</span> <span class="token number">700</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">,</span> <span class="token number">900</span><span class="token punctuation">,</span> <span class="token number">999</span><span class="token punctuation">]</span>
-<span class="token keyword">for</span> step <span class="token keyword">in</span> key_steps<span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"时间步 </span><span class="token interpolation"><span class="token punctuation">&#123;</span>step<span class="token punctuation">:</span><span class="token format-spec">3d</span><span class="token punctuation">&#125;</span></span><span class="token string">: SNR = </span><span class="token interpolation"><span class="token punctuation">&#123;</span>snr<span class="token punctuation">[</span>step<span class="token punctuation">]</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">8.4f</span><span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
-
-<span class="token comment"># 时间步   0: SNR =  39.9988</span>
-<span class="token comment"># 时间步 100: SNR =   9.3129</span>
-<span class="token comment"># 时间步 200: SNR =   2.8101</span>
-<span class="token comment"># 时间步 300: SNR =  -1.8696</span>
-<span class="token comment"># 时间步 400: SNR =  -6.1972</span>
-<span class="token comment"># 时间步 500: SNR = -10.7387</span>
-<span class="token comment"># 时间步 600: SNR = -15.8106</span>
-<span class="token comment"># 时间步 700: SNR = -21.6016</span>
-<span class="token comment"># 时间步 800: SNR = -28.2108</span>
-<span class="token comment"># 时间步 900: SNR = -35.6813</span>
-<span class="token comment"># 时间步 999: SNR = -43.9405</span></code></pre>
-
-<p>逆映射过程：给定信道SNR → 在预计算的SNR数组中找最接近值 → 返回对应时间步</p>
-<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">match_snr_t</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> snr<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        out <span class="token operator">=</span> torch<span class="token punctuation">.</span>argmin<span class="token punctuation">(</span>torch<span class="token punctuation">.</span><span class="token builtin">abs</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>snr <span class="token operator">-</span> snr<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> out</code></pre>
-
-<p>去噪过程：</p>
-<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">if</span> time_step <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
-                x_t <span class="token operator">=</span> extract<span class="token punctuation">(</span>self<span class="token punctuation">.</span>sqrt_alphas_bar<span class="token punctuation">,</span> t <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> x_t<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token operator">/</span> extract<span class="token punctuation">(</span>self<span class="token punctuation">.</span>sqrt_alphas_bar<span class="token punctuation">,</span> t<span class="token punctuation">,</span> 	                 x_t<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>x_t <span class="token operator">-</span> extract<span class="token punctuation">(</span>self<span class="token punctuation">.</span>sqrt_one_minus_alphas_bar<span class="token punctuation">,</span> t<span class="token punctuation">,</span> x_t<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token operator">*</span> eps<span class="token punctuation">)</span> <span class="token operator">+</span> 
-                extract<span class="token punctuation">(</span>self<span class="token punctuation">.</span>sqrt_one_minus_alphas_bar<span class="token punctuation">,</span> t <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> x_t<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token operator">*</span> eps
-<span class="token keyword">else</span><span class="token punctuation">:</span>
-                x_t <span class="token operator">=</span> <span class="token punctuation">(</span>x_t <span class="token operator">-</span> extract<span class="token punctuation">(</span>self<span class="token punctuation">.</span>sqrt_one_minus_alphas_bar<span class="token punctuation">,</span> t<span class="token punctuation">,</span> x_t<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token operator">*</span> eps<span class="token punctuation">)</span> <span class="token operator">/</span> extract<span class="token punctuation">(</span>
-                self<span class="token punctuation">.</span>sqrt_alphas_bar<span class="token punctuation">,</span> t<span class="token punctuation">,</span> x_t<span class="token punctuation">.</span>shape<span class="token punctuation">)</span></code></pre>
-
-<p>数学解释：</p>
-<p><code>x_&#123;t-1&#125; = (√ᾱ_&#123;t-1&#125; / √ᾱ_t) × (x_t - √(1-ᾱ_t) × ε_θ) + √(1-ᾱ_&#123;t-1&#125;) × ε_θ</code></p>
-<p><strong>系数A：</strong> <code>√ᾱ_&#123;t-1&#125; / √ᾱ_t</code></p>
-<ul>
-<li>时间步间的信号缩放因子</li>
-<li>补偿不同时间步的信号强度差异</li>
-</ul>
-<p><strong>项B：</strong> <code>x_t - √(1-ᾱ_t) × ε_θ</code></p>
-<ul>
-<li>从当前状态中减去预测的噪声</li>
-<li>得到”去噪后的信号”</li>
-</ul>
-<p><strong>项C：</strong> <code>√(1-ᾱ_&#123;t-1&#125;) × ε_θ</code></p>
-<ul>
-<li>添加适量的噪声到下一时间步</li>
-<li>保持扩散过程的随机性</li>
-</ul>
+<p>由于噪声调度大，反向不满足马尔可夫，x0现在不能直接由xt估算，所以给x0加上了一个随机扰动来“假装”估算了x0，所以本质上扩散模型只是用来稳定GAN的训练，对扩散模型本身没有帮助。</p>
+<p>补看了，因为对我的科研没啥帮助</p>
 
                 
             </div>
@@ -452,7 +385,7 @@ key_steps <span class="token operator">=</span> <span class="token punctuation">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://dianayyds.github.io/2025/09/01/cddm-gong-shi-hui-zong/">https://dianayyds.github.io/2025/09/01/cddm-gong-shi-hui-zong/</a>
+                    <a href="https://dianayyds.github.io/2025/09/22/diffusion-gan-yue-du/">https://dianayyds.github.io/2025/09/22/diffusion-gan-yue-du/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -804,13 +737,13 @@ key_steps <span class="token operator">=</span> <span class="token punctuation">
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2025/09/01/flow-matching-sao-mang/">
+                <a href="/2025/09/24/ckm-xin-dao-zhi-shi-di-tu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Flow-Matching扫盲">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="CKM信道知识地图">
                         
-                        <span class="card-title">Flow-Matching扫盲</span>
+                        <span class="card-title">CKM信道知识地图</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -821,7 +754,7 @@ key_steps <span class="token operator">=</span> <span class="token punctuation">
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-09-01
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-09-24
                         </span>
                         <span class="publish-author">
                             
@@ -841,24 +774,24 @@ key_steps <span class="token operator">=</span> <span class="token punctuation">
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/04/14/swin-transformer-yuan-li-ji-shi-xian/">
+                <a href="/2025/09/01/flow-matching-sao-mang/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="swin-transformer原理及实现">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Flow-Matching扫盲">
                         
-                        <span class="card-title">swin-transformer原理及实现</span>
+                        <span class="card-title">Flow-Matching扫盲</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            swin-transformer作为图像领域目前的通用骨干网络，值得一探
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-09-01
                             </span>
                         <span class="publish-author">
                             

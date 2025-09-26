@@ -9,7 +9,8 @@
 最简单的生成式模型，目标就是没输入的情况下，就能生成与给定目标集中的样本相近的样本。
 带条件的生成式模型，网络学习的是映射。
 
-diffusion算法，则是学一种降噪算法，它会自动判断图片中的噪">
+
+diffusion算法，则是学一种降噪算法，它会自动判断图片中的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -338,16 +339,21 @@ diffusion算法，则是学一种降噪算法，它会自动判断图片中的�
                 <p>Flow Matching是一种生成式模型。</p>
 <p>最简单的生成式模型，目标就是没输入的情况下，就能生成与给定目标集中的样本相近的样本。</p>
 <p>带条件的生成式模型，网络学习的是映射。</p>
-<p><img src="/2025/09/01/flow-matching-sao-mang/-17567118589765.png" alt="img"></p>
+<img src="/2025/09/01/flow-matching-sao-mang/-17567118589765.png" style="zoom:50%;">
+
 <p>diffusion算法，则是学一种降噪算法，它会自动判断图片中的噪声是啥，并尝试恢复原图。但如果直接一步用一张全是噪声的随机图来生成原图，则依然存在前述可能性过多而导致结果是多种可能均值的问题，因此，diffusion会进行初步的降噪，然后再尝试根据降噪的输出结果作为输入，再次尝试降噪，这次降噪时，因为已经有了前次的输出作为输入，更多的输入把结果坍缩成了少量的状态。这样经过多次迭代降噪，结果越来越坍缩，就规避掉了前边的结果为均值的问题。</p>
 <p>特别的，假设我们要生成的Pdata都是在[0, 4pi)区间内的y &#x3D; sin(x)曲线上的点，那么，我们想训练一个模型，希望能让这个模型学习到这些点的特征，并能够生成一个满足这些特征的任意的点。Flow Matching算法，要学的是一个行驶（修正）的方向，即，如果我有一个点，可以移动，我该怎么走，才能走到目标点上。</p>
-<p><img src="/2025/09/01/flow-matching-sao-mang/-17567118589751.png" alt="img"></p>
+<img src="/2025/09/01/flow-matching-sao-mang/-17567118589751.png" alt="img" style="zoom:50%;">
+
 <p>它学习的时候，会在source-&gt;target路线上采样出一堆点，然后简单直接的认为source到target这条直线上所有的点，都应该直接朝着target方向走。</p>
-<p><img src="/2025/09/01/flow-matching-sao-mang/-17567118589752.png" alt="img"></p>
+<img src="/2025/09/01/flow-matching-sao-mang/-17567118589752.png" alt="img" style="zoom:50%;">
+
 <p>ICLR2025: PnP-Flow: Plug-and-Play Image Restoration with Flow Matching</p>
 <p>GPT的鼓励：</p>
-<p><img src="/2025/09/01/flow-matching-sao-mang/-17567118589753.png" alt="img"></p>
-<p><img src="/2025/09/01/flow-matching-sao-mang/-17567118589764.png" alt="img"></p>
+<img src="/2025/09/01/flow-matching-sao-mang/-17567118589753.png" style="zoom:50%;">
+
+<img src="/2025/09/01/flow-matching-sao-mang/-17567118589764.png" alt style="zoom:50%;">
+
 <h3 id="虽然Flow-Matching为分数匹配提供了简单而优雅的替代方案，但仍面临一些重要局限性。"><a href="#虽然Flow-Matching为分数匹配提供了简单而优雅的替代方案，但仍面临一些重要局限性。" class="headerlink" title="虽然Flow Matching为分数匹配提供了简单而优雅的替代方案，但仍面临一些重要局限性。"></a>虽然Flow Matching为分数匹配提供了简单而优雅的替代方案，但仍面临一些重要局限性。</h3><ol>
 <li>采样保证问题。Flow Matching绕过了对数似然计算，而是将模型拟合到速度场。虽然这种方法简化了训练过程，但不再保证生成的样本严格位于目标分布中。这与传统的基于似然的方法形成对比，后者在理论上提供了更强的分布保证。</li>
 <li>其次是推理时的积分成本。要使用这种方法生成新样本，需要在推理时为每个输入样本求解ODE。与前馈模型或具有较少步骤的扩散采样相比，这在计算上可能是昂贵的，特别是在需要高精度积分的情况下。</li>
@@ -732,18 +738,17 @@ diffusion算法，则是学一种降噪算法，它会自动判断图片中的�
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2025/09/01/flow-matching-sao-mang/">
+                <a href="/2025/09/22/diffusion-gan-yue-du/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Flow-Matching扫盲">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="diffusion-GAN阅读">
                         
-                        <span class="card-title">Flow-Matching扫盲</span>
+                        <span class="card-title">diffusion-GAN阅读</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -753,9 +758,9 @@ diffusion算法，则是学一种降噪算法，它会自动判断图片中的�
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-09-01
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-09-22
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -764,7 +769,6 @@ diffusion算法，则是学一种降噪算法，它会自动判断图片中的�
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -775,24 +779,24 @@ diffusion算法，则是学一种降噪算法，它会自动判断图片中的�
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/09/01/cddm-gong-shi-hui-zong/">
+                <a href="/2025/04/14/swin-transformer-yuan-li-ji-shi-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="CDDM公式汇总">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="swin-transformer原理及实现">
                         
-                        <span class="card-title">CDDM公式汇总</span>
+                        <span class="card-title">swin-transformer原理及实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            swin-transformer作为图像领域目前的通用骨干网络，值得一探
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-09-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-14
                             </span>
                         <span class="publish-author">
                             

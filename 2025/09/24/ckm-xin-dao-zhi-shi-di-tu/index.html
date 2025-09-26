@@ -4,8 +4,20 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="milvus安装, Go,Python,算法,Linux,深度学习">
-    <meta name="description" content="用docker安装milvus过程中踩了不少坑，分享一下目前我成功的步骤">
+    <meta name="keywords" content="CKM信道知识地图, Go,Python,算法,Linux,深度学习">
+    <meta name="description" content="出自B站：BV19k6GYPE1H 信道知识地图(CKM)智能构建与应用 来自东南大学曾勇课题组
+
+
+
+
+
+
+
+
+
+
+
+要将CKM应用到语义通信的数据知识库，存在难点：目前调研的CKM数据库的索引主要是用户的位置信息，但是目前没有有效的信道">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +29,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>milvus安装 | 九日的个人博客</title>
+    <title>CKM信道知识地图 | 九日的个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -266,12 +278,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">milvus安装</h1>
+                    <h1 class="description center-align post-title">CKM信道知识地图</h1>
                 </div>
             </div>
         </div>
@@ -300,15 +312,6 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/milvus/" class="post-category">
-                                milvus
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
@@ -316,7 +319,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-03-07
+                    2025-09-24
                 </div>
                 
 
@@ -340,43 +343,19 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="注意（推荐用linux，windows安装会有很多问题）"><a href="#注意（推荐用linux，windows安装会有很多问题）" class="headerlink" title="注意（推荐用linux，windows安装会有很多问题）"></a>注意（推荐用linux，windows安装会有很多问题）</h4><p>docker环境需要自己先预先配置好，鉴于网络上相关的教程已经非常成熟，我就略过了，这里需要验证docker环境是否安装成功，在命令行下输入：</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">docker</span> run hello-world</code></pre>
+                <p>出自B站：BV19k6GYPE1H 信道知识地图(CKM)智能构建与应用 来自东南大学曾勇课题组</p>
+<img src="/2025/09/24/ckm-xin-dao-zhi-shi-di-tu/image-20250924104944805.png" alt="挑战" style="zoom:50%;">
 
-<p>如果出现如图所示的输出，那么docker环境就配置好了。</p>
-<img src="/2025/03/07/milvus-an-zhuang/image-20250307121258115.png">
+<img src="/2025/09/24/ckm-xin-dao-zhi-shi-di-tu/image-20250924105238442.png" style="zoom:50%;">
 
-<h4 id="开始安装milvus"><a href="#开始安装milvus" class="headerlink" title="开始安装milvus"></a>开始安装milvus</h4><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> milvus2
+<img src="/2025/09/24/ckm-xin-dao-zhi-shi-di-tu/image-20250924105255000.png" style="zoom:50%;">
 
-<span class="token builtin class-name">cd</span> milvus2
+<img src="/2025/09/24/ckm-xin-dao-zhi-shi-di-tu/image-20250924105517903.png" style="zoom:50%;">
 
-<span class="token function">wget</span> https://github.com/milvus-io/milvus/releases/download/v2.2.13/milvus-standalone-docker-compose.yml <span class="token parameter variable">-O</span> docker-compose.yml</code></pre>
+<img src="/2025/09/24/ckm-xin-dao-zhi-shi-di-tu/image-20250924110022207.png" style="zoom: 80%;">
 
-<p><img src="/2025/03/07/milvus-an-zhuang/image-20250307121707310.png"></p>
-<p> 查看当前文件夹，会出现一个名为docker-compose.yml的文件，打开这个文件（任意方式打开都行，记事本，vscode等等能编辑的都行，会用vim当然更好），把下面这一段粘贴进去（这里attu的版本是2.2.8，和前面安装milvus版本2.2.13是相互对应的，我试过很多版本，目前就这俩亲测好用）</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash">attu:
-    container_name: attu
-    image: zilliz/attu:v2.2.8
-    environment:
-      MILVUS_URL: <span class="token number">127.0</span>.0.1:19530
-    ports:
-      - <span class="token string">"3000:3000"</span>
-    depends_on:
-      - <span class="token string">"standalone"</span></code></pre>
-
-<p>格式参考截图，attu需要和上面的standalone在同一列</p>
-<img src="/2025/03/07/milvus-an-zhuang/image-20250307122121078.png">
-
-<p>记得保存修改，然后回到之前的命令行</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span></code></pre>
-
-<p><img src="/2025/03/07/milvus-an-zhuang/image-20250307122416837.png"></p>
-<p>​	验证连接</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> port milvus-standalone <span class="token number">19530</span>/tcp</code></pre>
-
-<p><img src="/2025/03/07/milvus-an-zhuang/image-20250307122718107.png"></p>
-<p>在浏览器输入 <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000</a> 进入attu可视化界面，完成</p>
-<p><img src="/2025/03/07/milvus-an-zhuang/image-20250307122854318.png"></p>
+<p><img src="/2025/09/24/ckm-xin-dao-zhi-shi-di-tu/d68444bcf4050fe510d86789a5fe7b2b.jpg"></p>
+<p>要将CKM应用到语义通信的数据知识库，存在难点：目前调研的CKM数据库的索引主要是用户的位置信息，但是目前没有有效的信道场景建模工具，既能实现场景建模，又能模拟一定距离下的数据传输：比如模拟6G通信系统的sionna，虽然可以实现光线追踪建模并得到CSI，但是无法实现一定距离下的数据传输的模拟，因为距离限制下存在大尺度衰落。目前的解决方案有：改变索引的内容，最好是SNR相关，这样会和ai结合紧密一些，但是还没有想好数据库应该存什么数据；或者寻找一个公开CKM数据集，但是目前东南大学的源数据并未公开，而且就算找到了又缺乏理论创新型。</p>
 
                 
             </div>
@@ -403,7 +382,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://dianayyds.github.io/2025/03/07/milvus-an-zhuang/">https://dianayyds.github.io/2025/03/07/milvus-an-zhuang/</a>
+                    <a href="https://dianayyds.github.io/2025/09/24/ckm-xin-dao-zhi-shi-di-tu/">https://dianayyds.github.io/2025/09/24/ckm-xin-dao-zhi-shi-di-tu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -751,29 +730,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2025/04/13/tu-xiang-chong-jian-zhi-biao-mse-psnr-ssim/">
+                <a href="/2025/09/24/ckm-xin-dao-zhi-shi-di-tu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="图像重建指标(mse+psnr+ssim)">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="CKM信道知识地图">
                         
-                        <span class="card-title">图像重建指标(mse+psnr+ssim)</span>
+                        <span class="card-title">CKM信道知识地图</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            图像质量评估中的关键指标MSE（均方误差）、PSNR（峰值信噪比）以及SSIM（结构相似性）
+                            
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-04-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-09-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -782,6 +762,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -792,33 +773,29 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/02/16/da-mo-xing-wai-gua-xiang-liang-zhi-shi-ku/">
+                <a href="/2025/09/22/diffusion-gan-yue-du/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="大模型外挂向量知识库">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="diffusion-GAN阅读">
                         
-                        <span class="card-title">大模型外挂向量知识库</span>
+                        <span class="card-title">diffusion-GAN阅读</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是大模型外挂向量知识库？
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-09-22
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A4%96%E6%8C%82%E5%90%91%E9%87%8F%E7%9F%A5%E8%AF%86%E5%BA%93/" class="post-category">
-                                    大模型外挂向量知识库
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            ycx
                             
                         </span>
                     </div>
